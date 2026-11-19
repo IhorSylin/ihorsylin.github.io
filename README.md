@@ -15,6 +15,28 @@ style.css    all the styling — colours live in :root at the top
 images/      your pictures go here
 ```
 
+## Layout
+
+One breakpoint, at **920px**:
+
+- **below 920px** — single column, everything stacked. Phones and small tablets.
+- **920px and up** — two columns: the name/links/intro become a sticky sidebar on the left
+  that stays put while the right column scrolls. Content grids (skills, cards, gallery)
+  add columns as the window widens, up to a 1240px cap so lines don't get unreadably long.
+
+To change where it switches, edit the two `@media (min-width: 920px)` blocks in `style.css`.
+Sidebar width and the outer cap are `--sidebar` and `--maxw` in `:root`.
+
+## ⚠️ After changing style.css, bump the version
+
+The stylesheet is linked as `style.css?v=2`. Browsers cache CSS aggressively — without
+bumping that number, people who have visited before keep seeing the old styling even after
+you push. So when you edit `style.css`, also change the link in `index.html`:
+
+```html
+<link rel="stylesheet" href="style.css?v=3">
+```
+
 ## Editing it
 
 **Text:** open `index.html` and change the words. That's it.
