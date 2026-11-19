@@ -17,15 +17,17 @@ images/      your pictures go here
 
 ## Layout
 
-One breakpoint, at **920px**:
+One centred column at every width — no sidebar. The column is capped at **1080px**
+(`--maxw` in `:root`) so it fills a desktop properly without stretching edge to edge.
 
-- **below 920px** — single column, everything stacked. Phones and small tablets.
-- **920px and up** — two columns: the name/links/intro become a sticky sidebar on the left
-  that stays put while the right column scrolls. Content grids (skills, cards, gallery)
-  add columns as the window widens, up to a 1240px cap so lines don't get unreadably long.
+Inside it, the grids adapt on their own as the window widens:
 
-To change where it switches, edit the two `@media (min-width: 920px)` blocks in `style.css`.
-Sidebar width and the outer cap are `--sidebar` and `--maxw` in `:root`.
+- **skills** — 1 column on a phone, up to 4 on a desktop
+- **project cards** — stacked on a phone, side by side from ~600px
+- **gallery** — 1 column up to 4, depending on width
+
+Body text is capped at 76 characters per line (`--measure`) even inside a wide card, because
+lines longer than that get hard to read. Change that one value if you want it wider.
 
 ## ⚠️ After changing style.css, bump the version
 

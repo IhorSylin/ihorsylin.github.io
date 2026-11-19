@@ -1,6 +1,6 @@
 /* ---------------------------------------------------------------
    Portfolio theme. Colours live in :root — change them here.
-   Layout: single column on phones, two columns from 920px up.
+   Layout: one centred column at every width. No sidebar.
    --------------------------------------------------------------- */
 :root {
   --bg:        #0e1116;
@@ -10,9 +10,8 @@
   --text-dim:  #9aa7b4;
   --accent:    #6ea8fe;
   --radius: 10px;
-  --maxw: 1240px;          /* outer cap on very wide screens */
-  --sidebar: 300px;        /* left column width at desktop */
-  --gap: 56px;
+  --maxw: 1080px;   /* width of the centred column on large screens */
+  --measure: 76ch;  /* longest a line of body text is allowed to get */
   --font: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 }
@@ -33,69 +32,54 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* ---------- layout ---------- */
+/* ---------- the one container everything sits in ---------- */
 .layout { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
+@media (min-width: 700px) { .layout { padding: 0 32px; } }
 
-@media (min-width: 920px) {
-  .layout {
-    display: grid;
-    grid-template-columns: var(--sidebar) minmax(0, 1fr);
-    gap: var(--gap);
-    align-items: start;
-    padding: 0 32px;
-  }
-  .sidebar {
-    position: sticky; top: 0;
-    height: 100vh;
-    display: flex; flex-direction: column; justify-content: center;
-    padding-right: 8px;
-  }
-  main { padding: 88px 0 0; }
-  section { border-bottom: none; padding: 0 0 64px; }
-}
-
-/* ---------- sidebar ---------- */
-.sidebar { padding: 64px 0 24px; }
-h1 { font-size: clamp(2rem, 5vw, 2.6rem); margin: 0 0 6px; letter-spacing: -0.02em; }
-.role { color: var(--text-dim); font-size: 1.02rem; margin: 0 0 20px; }
-.links { display: flex; flex-wrap: wrap; gap: 9px; padding: 0; margin: 0 0 22px; list-style: none; }
+/* ---------- header ---------- */
+header { padding: 72px 0 40px; border-bottom: 1px solid var(--border); }
+@media (min-width: 700px) { header { padding: 96px 0 48px; } }
+h1 { font-size: clamp(2rem, 6vw, 3rem); margin: 0 0 8px; letter-spacing: -0.02em; }
+.role { color: var(--text-dim); font-size: 1.05rem; margin: 0 0 20px; }
+.links { display: flex; flex-wrap: wrap; gap: 9px; padding: 0; margin: 0; list-style: none; }
 .links a {
-  display: inline-block; padding: 5px 12px; border: 1px solid var(--border);
-  border-radius: 999px; font-size: 0.86rem; color: var(--text);
+  display: inline-block; padding: 6px 13px; border: 1px solid var(--border);
+  border-radius: 999px; font-size: 0.88rem; color: var(--text);
 }
 .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-.intro { margin: 0; color: var(--text-dim); font-size: 0.95rem; }
+.intro { margin: 26px 0 0; max-width: 64ch; color: var(--text-dim); font-size: 1.02rem; }
 .intro strong { color: var(--text); font-weight: 600; }
 
 /* ---------- sections ---------- */
-section { padding: 44px 0; border-bottom: 1px solid var(--border); }
+section { padding: 52px 0; border-bottom: 1px solid var(--border); }
 section:last-of-type { border-bottom: none; }
 h2 {
   font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.13em;
-  color: var(--text-dim); margin: 0 0 20px; font-weight: 600;
+  color: var(--text-dim); margin: 0 0 22px; font-weight: 600;
 }
-h3 { font-size: 1.05rem; margin: 0 0 6px; }
-.meta { font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); margin: 0 0 10px; }
+h3 { font-size: 1.08rem; margin: 0 0 6px; }
+.meta { font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); margin: 0 0 11px; }
 
 .card {
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px 22px; margin-bottom: 14px;
+  border-radius: var(--radius); padding: 22px 24px; margin-bottom: 14px;
 }
-.card p { margin: 0 0 10px; color: var(--text-dim); }
+/* keep lines readable even though the card itself is wide */
+.card p { margin: 0 0 11px; color: var(--text-dim); max-width: var(--measure); }
 .card p:last-child { margin-bottom: 0; }
 
-/* two cards side by side once there is room */
-.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+/* side-by-side cards once there is room */
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 .cards .card { margin-bottom: 0; }
 .card--wide { grid-column: 1 / -1; }
 
 /* ---------- skills ---------- */
-.skills { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 20px; }
-.skills h4 { margin: 0 0 5px; font-size: 0.87rem; }
-.skills p { margin: 0; color: var(--text-dim); font-size: 0.89rem; }
+.skills { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); margin-top: 22px; }
+.skills h4 { margin: 0 0 5px; font-size: 0.88rem; }
+.skills p { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
 
 /* ---------- gallery ---------- */
-.gallery { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 235px), 1fr)); }
+.gallery { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
 figure { margin: 0; }
 figure img, .placeholder {
   width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
@@ -106,8 +90,7 @@ figure img, .placeholder {
   color: var(--text-dim); font-family: var(--mono); font-size: 0.73rem;
   text-align: center; padding: 12px;
 }
-figcaption { font-size: 0.83rem; color: var(--text-dim); margin-top: 7px; }
+figcaption { font-size: 0.83rem; color: var(--text-dim); margin-top: 8px; }
 
 /* ---------- footer ---------- */
-footer { padding: 28px 0 56px; color: var(--text-dim); font-size: 0.87rem; border-top: 1px solid var(--border); }
-@media (min-width: 920px) { footer { margin-top: 8px; } }
+footer { padding: 34px 0 64px; color: var(--text-dim); font-size: 0.88rem; }
