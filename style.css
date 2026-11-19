@@ -1,0 +1,84 @@
+/* ---------------------------------------------------------------
+   Portfolio theme. Edit the values in :root to restyle the site.
+   --------------------------------------------------------------- */
+:root {
+  --bg:        #0e1116;
+  --bg-card:   #161b22;
+  --border:    #262d38;
+  --text:      #e6edf3;
+  --text-dim:  #9aa7b4;
+  --accent:    #6ea8fe;
+  --radius: 10px;
+  --maxw: 880px;
+  --font: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+}
+/* Light mode: respects the visitor's OS setting. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #ffffff; --bg-card: #f6f8fa; --border: #d8dee4;
+    --text: #1f2328; --text-dim: #5a6472; --accent: #0969da;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: var(--font); line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- header ---------- */
+header { padding: 72px 0 40px; border-bottom: 1px solid var(--border); }
+h1 { font-size: clamp(2rem, 6vw, 2.75rem); margin: 0 0 6px; letter-spacing: -0.02em; }
+.role { color: var(--text-dim); font-size: 1.05rem; margin: 0 0 18px; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
+.links a {
+  display: inline-block; padding: 6px 13px; border: 1px solid var(--border);
+  border-radius: 999px; font-size: 0.9rem; color: var(--text);
+}
+.links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
+.intro { margin: 26px 0 0; max-width: 62ch; color: var(--text-dim); }
+.intro strong { color: var(--text); font-weight: 600; }
+
+/* ---------- sections ---------- */
+section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+h2 {
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--text-dim); margin: 0 0 22px; font-weight: 600;
+}
+h3 { font-size: 1.05rem; margin: 0 0 6px; }
+.meta { font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); margin: 0 0 10px; }
+
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; margin-bottom: 14px;
+}
+.card p { margin: 0 0 10px; color: var(--text-dim); }
+.card p:last-child { margin-bottom: 0; }
+
+/* ---------- skills ---------- */
+.skills { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+.skills h4 { margin: 0 0 6px; font-size: 0.88rem; }
+.skills p { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
+
+/* ---------- gallery ---------- */
+.gallery { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+figure { margin: 0; }
+figure img, .placeholder {
+  width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
+  border-radius: var(--radius); border: 1px solid var(--border); display: block;
+}
+.placeholder {
+  display: grid; place-items: center; background: var(--bg-card);
+  color: var(--text-dim); font-family: var(--mono); font-size: 0.75rem;
+  text-align: center; padding: 12px;
+}
+figcaption { font-size: 0.84rem; color: var(--text-dim); margin-top: 7px; }
+
+/* ---------- footer ---------- */
+footer { padding: 36px 0 64px; color: var(--text-dim); font-size: 0.88rem; }
