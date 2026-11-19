@@ -69,7 +69,7 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
 .card p:last-child { margin-bottom: 0; }
 
 /* side-by-side cards once there is room */
-.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); }
 .cards .card { margin-bottom: 0; }
 .card--wide { grid-column: 1 / -1; }
 
@@ -79,7 +79,7 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
 .skills p { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
 
 /* ---------- gallery ---------- */
-.gallery { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); }
+.gallery { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 figure { margin: 0; }
 figure img, .placeholder {
   width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
