@@ -73,6 +73,14 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
 .cards .card { margin-bottom: 0; }
 .card--wide { grid-column: 1 / -1; }
 
+/* ---------- lists inside cards ---------- */
+.card ul { margin: 0; padding-left: 4.5mm; padding-left: 18px; }
+.card li { margin: 0 0 10px; color: var(--text-dim); }
+.card li:last-child { margin-bottom: 0; }
+.card li::marker { color: var(--border); }
+.card li b, .card li strong { color: var(--text); font-weight: 600; }
+.sub-role { font-size: 0.88rem; color: var(--text-dim); margin: 14px 0 0; }
+
 /* ---------- skills ---------- */
 .skills { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); margin-top: 22px; }
 .skills h4 { margin: 0 0 5px; font-size: 0.88rem; }
