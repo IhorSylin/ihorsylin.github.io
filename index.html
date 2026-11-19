@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ihor Sylin — Full-Stack Engineer</title>
 <meta name="description" content="Full-stack engineer in Tallinn. Production services in TypeScript, React and Node. Shader programming and 3D art for games on the side.">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=4">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
 </head>
 <body>
@@ -21,12 +21,10 @@
       <li><a href="mailto:basilisk.fly@gmail.com">Email</a></li>
     </ul>
     <p class="intro">
-      Full-stack engineer at Pipedrive — <strong>React and TypeScript</strong> on the
-      frontend, <strong>Node and Fastify</strong> behind it, with MySQL and Kafka. Worked for
-      two years on subscription billing and monetization. The complexity of the domain was
-      keeping subscription state correct: a subscription can have discounts, scheduled changes
-      and a legacy plan at once, and every combination has to stay right across the product
-      and the billing platform. Outside work I build games and make 3D models.
+      I build and run production software — <strong>React and TypeScript</strong> over
+      <strong>Node services</strong>, with Kafka and gradual rollouts. Outside work I make
+      games: <strong>shader programming</strong> and 3D asset pipelines in Godot, and a 2D
+      action game written directly on raylib in C++.
     </p>
   </header>
 
@@ -36,42 +34,30 @@
       <h2>Engineering</h2>
 
       <div class="card">
-        <h3>Pipedrive — Software Engineer</h3>
+        <h3>Pipedrive — Junior Software Engineer</h3>
         <p class="meta">Jan 2025 – Dec 2026 · Billing &amp; Monetization · Tallinn</p>
-        <ul>
-          <li>
-            <b>Led the technical implementation of a cross-team project — pricing tests.</b>
-            They required designing a way to provide different price points to users across
-            around 20 countries. I worked with stakeholders and other teams, designed the
-            architecture, planned the work and facilitated the delivery from the initial
-            request to rollout and aftercare. The hard part was making it react dynamically to
-            changes in user properties, and opt users in and out as those changed.
-          </li>
-          <li>
-            <b>AI-assisted development</b> — extensively used LLMs in my workflow: Claude,
-            Copilot, Gemini. I have experience writing Claude Code skills.
-          </li>
-          <li>
-            <b>Full ownership of issues and e2e implementation</b> — there wasn't a separation
-            between backend and frontend work, so I developed a habit of owning my work and
-            acting proactively to fix the root cause of an issue. This involved extensive
-            communication with team members and understanding the full context of the problem.
-          </li>
-          <li>
-            <b>Worked on both frontend and backend across multiple microservices</b> —
-            implemented UI changes and developed backend endpoints, including the main endpoint
-            that handled the pricing test logic and used a Kafka consumer on a company-wide
-            topic. Also worked with Amplitude experiments.
-          </li>
-          <li>
-            <b>Live debugging and monitoring</b> — implemented logging and monitoring systems
-            to track experiment exposure and detect issues in real time, and troubleshot and
-            resolved live issues in production.
-          </li>
-        </ul>
-        <p class="sub-role">
-          Software Engineering Intern, Oct – Dec 2024 (Pipedrive School of Code) — converted to
-          a permanent role.
+        <p>
+          Subscription billing — a domain where one subscription can carry discounts,
+          scheduled changes and a legacy plan at once, and every combination has to stay
+          correct across the product, the invoice and the data warehouse.
+        </p>
+        <p>
+          Took a capability spanning four services from an open-ended brief to production,
+          alone — a Kafka consumer on a company-wide event topic, two service endpoints, an
+          allowlist — then kept improving it after release, shipping three hardening changes
+          driven by what production traffic exposed. Scoped and led a five-person
+          cross-functional mission, every other member senior to me, and wrote the
+          architecture decision record behind it; a later decision record built on that one.
+        </p>
+        <p>
+          Also: the platform for running pricing experiments across ~20 countries — assigning
+          a company to a variant and keeping that decision consistent everywhere it surfaces —
+          and two authored Claude Code skills for my team's workflow.
+        </p>
+        <p>
+          On the team's support rotation I diagnosed a live production error from logs,
+          mitigated it the same day and filed the follow-up fix — and chose a rollback over a
+          Friday forward-fix when the risk didn't justify shipping.
         </p>
       </div>
 
@@ -82,56 +68,55 @@
         </div>
         <div>
           <h4>Backend</h4>
-          <p>Node.js · Fastify · REST APIs · MySQL · Apache Kafka</p>
+          <p>Node.js · Fastify · REST APIs · MySQL · Apache Kafka · Docker</p>
         </div>
         <div>
-          <h4>Game &amp; 3D</h4>
-          <p>Godot 4 · 3D Modelling · C++ · Blender · Maya · Substance Painter</p>
+          <h4>Graphics &amp; Games</h4>
+          <p>Godot 4 · GDShader / GLSL · C++ / raylib · Blender · Maya · TrenchBroom</p>
         </div>
         <div>
           <h4>Practice</h4>
-          <p>AI-assisted development · incremental delivery · E2E implementation · production support · Unit/Functional testing · Cypress</p>
+          <p>Feature flags · gradual rollout · production support · Jest, Cypress · CI/CD · AI-assisted development</p>
         </div>
       </div>
     </section>
 
     <section id="games">
-      <h2>Games &amp; 3D — side projects, 2023 – present</h2>
+      <h2>Games &amp; 3D</h2>
       <div class="cards">
 
         <div class="card card--wide">
-          <h3>3D assets for games</h3>
-          <p class="meta">Blender · Maya · ZBrush · Substance Painter</p>
+          <h3>Wolf-Hunter — solo 2D action game</h3>
+          <p class="meta">C++ · raylib · no engine · <a href="https://github.com/IhorSylin/Wolf-Hunter">source</a></p>
           <p>
-            Worked on creating 3D assets for games in small teams over four years — learned to
-            draw hand-painted and realistic textures with PBR materials, hard-surface modelling
-            and sculpting in ZBrush, UV unwrapping and baking. Sculpted and rendered high-poly
-            humanoid models for personal projects.
+            ~56 KB of hand-written C++: tile collision over a 98×65 grid, eight enemy state
+            machines with independent cooldown timers, two weapon systems with combo chains
+            and projectiles, a dodge roll with invulnerability frames, binary save/load, and
+            its own sprite-animation framework. Art and Tiled maps are mine too.
           </p>
         </div>
 
         <div class="card">
-          <h3>Three team projects</h3>
-          <p class="meta">Godot 4 · over two years · 4–6 person team</p>
+          <h3>Shader programming — Godot 4</h3>
+          <p class="meta">GDShader / GLSL</p>
           <p>
-            Three team projects over two years with a recurring 4–6 person team, including
-            multiple game jams and our biggest project — <i>Dwarf Escape</i>, to which I
-            contributed 3D environment art and materials. We showcased it twice at game-dev
-            expo events and hosted tournaments for it.
+            A modular cel-shading system: a base shader include plus eight feature modules —
+            normal mapping, emission, reflections, occlusion, anisotropy, backlight,
+            refraction, transparency — composed at compile time into per-object materials,
+            with matching inverted-hull outline shaders. Reused across three projects.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Team projects — Godot 4</h3>
+          <p class="meta">2024 – present · incl. Global Game Jam Tallinn 2025</p>
+          <p>
+            Five projects with a recurring 4–6 person team, contributing 3D environment art
+            and materials. Full asset pipeline end to end: modelled in Blender and Maya,
+            exported to FBX/glTF, composed into the Godot scenes that consume them — plus
+            TrenchBroom level blockouts, UV unwrapping, mesh-map baking and PBR texturing.
           </p>
           <p><a href="https://github.com/P3-J/jamjamjam">Dwarf Escape on GitHub</a></p>
-        </div>
-
-        <div class="card">
-          <h3>Wolf-Hunter — solo 2D action game</h3>
-          <p class="meta">~56 KB of hand-written C++ on raylib · no engine</p>
-          <p>
-            I engineered all of it myself: the tile collision system for character movement,
-            enemy state machines, two weapon systems with combo timers and projectiles, a dodge
-            roll with invulnerability frames, binary save/load and its own sprite-animation
-            framework.
-          </p>
-          <p><a href="https://github.com/IhorSylin/Wolf-Hunter">Wolf-Hunter on GitHub</a></p>
         </div>
 
       </div>
