@@ -10,154 +10,154 @@
 </head>
 <body>
 
-<header>
-  <div class="wrap">
+<div class="layout">
+
+  <aside class="sidebar">
     <h1>Ihor Sylin</h1>
     <p class="role">Full-Stack Engineer · Tallinn, Estonia</p>
     <ul class="links">
       <li><a href="https://github.com/IhorSylin">GitHub</a></li>
       <li><a href="https://www.linkedin.com/in/ihor-sylin-950201330">LinkedIn</a></li>
       <li><a href="mailto:basilisk.fly@gmail.com">Email</a></li>
-      <li><a href="#games">Games &amp; 3D</a></li>
     </ul>
     <p class="intro">
       I build and run production software — <strong>React and TypeScript</strong> over
-      <strong>Node services</strong>, with Kafka, staged rollouts and on-call. Outside work I
-      make games: <strong>shader programming</strong> and 3D asset pipelines in Godot, and a
-      2D action game written directly on raylib in C++.
+      <strong>Node services</strong>, with Kafka, staged rollouts and on-call. Outside work
+      I make games: <strong>shader programming</strong> and 3D asset pipelines in Godot, and
+      a 2D action game written directly on raylib in C++.
     </p>
-  </div>
-</header>
+  </aside>
 
-<section id="engineering">
-  <div class="wrap">
-    <h2>Engineering</h2>
+  <main>
 
-    <div class="card">
-      <h3>Pipedrive — Junior Software Engineer</h3>
-      <p class="meta">Jan 2025 – Dec 2026 · Billing &amp; Monetization · Tallinn</p>
-      <p>
-        Subscription billing: working out what a customer is charged when they change plan
-        mid-cycle, and keeping that figure consistent across the product, the invoice, the
-        payment provider and the data warehouse.
-      </p>
-      <p>
-        Built a four-service, event-driven capability end to end — a Kafka consumer on a
-        company-wide event topic, two service endpoints and an allowlist mechanism — then
-        shipped three hardening releases against it after launch. Scoped and led a
-        five-person cross-functional mission, wrote the architecture decision record behind
-        it, and ran the staged rollout at 10%, 50% and 100%.
-      </p>
-      <p>
-        Also: the platform for running pricing experiments across ~20 countries, production
-        on-call, and two authored Claude Code skills for my team's workflow.
-      </p>
-    </div>
+    <section id="engineering">
+      <h2>Engineering</h2>
 
-    <div class="skills">
-      <div>
-        <h4>Frontend</h4>
-        <p>TypeScript · React · Redux Toolkit · React Query · micro-frontends</p>
+      <div class="card">
+        <h3>Pipedrive — Junior Software Engineer</h3>
+        <p class="meta">Jan 2025 – Dec 2026 · Billing &amp; Monetization · Tallinn</p>
+        <p>
+          Subscription billing: working out what a customer is charged when they change plan
+          mid-cycle, and keeping that figure consistent across the product, the invoice, the
+          payment provider and the data warehouse.
+        </p>
+        <p>
+          Built a four-service, event-driven capability end to end — a Kafka consumer on a
+          company-wide event topic, two service endpoints and an allowlist mechanism — then
+          shipped three hardening releases against it after launch. Scoped and led a
+          five-person cross-functional mission, wrote the architecture decision record behind
+          it, and ran the staged rollout at 10%, 50% and 100%.
+        </p>
+        <p>
+          Also: the platform for running pricing experiments across ~20 countries, production
+          on-call, and two authored Claude Code skills for my team's workflow.
+        </p>
       </div>
-      <div>
-        <h4>Backend</h4>
-        <p>Node.js · Fastify · REST APIs · MySQL · Apache Kafka · Docker</p>
+
+      <div class="skills">
+        <div>
+          <h4>Frontend</h4>
+          <p>TypeScript · React · Redux Toolkit · React Query · micro-frontends</p>
+        </div>
+        <div>
+          <h4>Backend</h4>
+          <p>Node.js · Fastify · REST APIs · MySQL · Apache Kafka · Docker</p>
+        </div>
+        <div>
+          <h4>Graphics &amp; Games</h4>
+          <p>Godot 4 · GDShader / GLSL · C++ / raylib · Blender · Maya · TrenchBroom</p>
+        </div>
+        <div>
+          <h4>Practice</h4>
+          <p>Feature flags · staged rollout · on-call · Jest, Cypress · CI/CD · AI-assisted development</p>
+        </div>
       </div>
-      <div>
-        <h4>Graphics &amp; Games</h4>
-        <p>Godot 4 · GDShader / GLSL · C++ / raylib · Blender · Maya · TrenchBroom</p>
+    </section>
+
+    <section id="games">
+      <h2>Games &amp; 3D</h2>
+      <div class="cards">
+
+        <div class="card card--wide">
+          <h3>Wolf-Hunter — solo 2D action game</h3>
+          <p class="meta">C++ · raylib · no engine · <a href="https://github.com/IhorSylin/Wolf-Hunter">source</a></p>
+          <p>
+            ~56 KB of hand-written C++: tile collision over a 98×65 grid, eight enemy state
+            machines with independent cooldown timers, two weapon systems with combo chains
+            and projectiles, a dodge roll with invulnerability frames, binary save/load, and
+            its own sprite-animation framework. Art and Tiled maps are mine too.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Shader programming — Godot 4</h3>
+          <p class="meta">GDShader / GLSL</p>
+          <p>
+            A modular cel-shading system: a base shader include plus eight feature modules —
+            normal mapping, emission, reflections, occlusion, anisotropy, backlight,
+            refraction, transparency — composed at compile time into per-object materials,
+            with matching inverted-hull outline shaders. Reused across three projects.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Team projects — Godot 4</h3>
+          <p class="meta">2024 – present · incl. Global Game Jam Tallinn 2025</p>
+          <p>
+            Five projects with a recurring 4–6 person team, contributing 3D environment art
+            and materials. Full asset pipeline end to end: modelled in Blender and Maya,
+            exported to FBX/glTF, composed into the Godot scenes that consume them — plus
+            TrenchBroom level blockouts, UV unwrapping, mesh-map baking and PBR texturing.
+          </p>
+          <p><a href="https://github.com/P3-J/jamjamjam">Dwarf Escape on GitHub</a></p>
+        </div>
+
       </div>
-      <div>
-        <h4>Practice</h4>
-        <p>Feature flags · staged rollout · on-call · Jest, Cypress · CI/CD · AI-assisted development</p>
+    </section>
+
+    <section id="gallery">
+      <h2>3D Work</h2>
+      <!-- TO ADD A PIECE: drop the file in images/, then replace the
+           <div class="placeholder">…</div> below with:
+           <img src="images/your-file.jpg" alt="short description"> -->
+      <div class="gallery">
+        <figure>
+          <div class="placeholder">images/piece-1.jpg<br>final render</div>
+          <figcaption>Replace me — final render, with poly count.</figcaption>
+        </figure>
+        <figure>
+          <div class="placeholder">images/piece-1-wires.jpg<br>wireframe</div>
+          <figcaption>Replace me — wireframe. Show the topology.</figcaption>
+        </figure>
+        <figure>
+          <div class="placeholder">images/piece-1-uv.jpg<br>UV layout</div>
+          <figcaption>Replace me — UV layout and bakes.</figcaption>
+        </figure>
+        <figure>
+          <div class="placeholder">images/piece-2.jpg</div>
+          <figcaption>Replace me.</figcaption>
+        </figure>
+        <figure>
+          <div class="placeholder">images/piece-3.jpg</div>
+          <figcaption>Replace me.</figcaption>
+        </figure>
+        <figure>
+          <div class="placeholder">images/gameplay.jpg<br>video thumbnail</div>
+          <figcaption>Replace me — or embed a YouTube clip here.</figcaption>
+        </figure>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<section id="games">
-  <div class="wrap">
-    <h2>Games &amp; 3D</h2>
-
-    <div class="card">
-      <h3>Wolf-Hunter — solo 2D action game</h3>
-      <p class="meta">C++ · raylib · no engine · <a href="https://github.com/IhorSylin/Wolf-Hunter">source</a></p>
+    <footer>
       <p>
-        ~56 KB of hand-written C++: tile collision over a 98×65 grid, eight enemy state
-        machines with independent cooldown timers, two weapon systems with combo chains and
-        projectiles, a dodge roll with invulnerability frames, binary save/load, and its own
-        sprite-animation framework. Art and Tiled maps are mine too.
+        <a href="mailto:basilisk.fly@gmail.com">basilisk.fly@gmail.com</a> ·
+        <a href="https://github.com/IhorSylin">github.com/IhorSylin</a>
       </p>
-    </div>
+    </footer>
 
-    <div class="card">
-      <h3>Shader programming — Godot 4</h3>
-      <p class="meta">GDShader / GLSL</p>
-      <p>
-        A modular cel-shading system: a base shader include plus eight feature modules —
-        normal mapping, emission, reflections, occlusion, anisotropy, backlight, refraction,
-        transparency — composed at compile time into per-object materials, with matching
-        inverted-hull outline shaders. Reused across three projects.
-      </p>
-    </div>
+  </main>
 
-    <div class="card">
-      <h3>Team projects — Godot 4</h3>
-      <p class="meta">2024 – present · incl. Global Game Jam Tallinn 2025</p>
-      <p>
-        Five projects with a recurring 4–6 person team, contributing 3D environment art and
-        materials. Full asset pipeline end to end: modelled in Blender and Maya, exported to
-        FBX/glTF, composed into the Godot scenes that consume them — plus TrenchBroom level
-        blockouts, UV unwrapping, mesh-map baking and PBR texturing.
-      </p>
-      <p><a href="https://github.com/P3-J/jamjamjam">Dwarf Escape on GitHub</a></p>
-    </div>
-  </div>
-</section>
-
-<section id="gallery">
-  <div class="wrap">
-    <h2>3D Work</h2>
-    <!-- TO ADD A PIECE: drop the file in images/, then copy one <figure> block
-         below and swap the <div class="placeholder"> for:
-         <img src="images/your-file.jpg" alt="short description"> -->
-    <div class="gallery">
-      <figure>
-        <div class="placeholder">images/piece-1.jpg<br>final render</div>
-        <figcaption>Replace me — final render, with poly count.</figcaption>
-      </figure>
-      <figure>
-        <div class="placeholder">images/piece-1-wires.jpg<br>wireframe</div>
-        <figcaption>Replace me — wireframe. Show the topology.</figcaption>
-      </figure>
-      <figure>
-        <div class="placeholder">images/piece-1-uv.jpg<br>UV layout</div>
-        <figcaption>Replace me — UV layout and bakes.</figcaption>
-      </figure>
-      <figure>
-        <div class="placeholder">images/piece-2.jpg</div>
-        <figcaption>Replace me.</figcaption>
-      </figure>
-      <figure>
-        <div class="placeholder">images/piece-3.jpg</div>
-        <figcaption>Replace me.</figcaption>
-      </figure>
-      <figure>
-        <div class="placeholder">images/gameplay.jpg<br>video thumbnail</div>
-        <figcaption>Replace me — or embed a YouTube clip here.</figcaption>
-      </figure>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <p>
-      <a href="mailto:basilisk.fly@gmail.com">basilisk.fly@gmail.com</a> ·
-      <a href="https://github.com/IhorSylin">github.com/IhorSylin</a>
-    </p>
-  </div>
-</footer>
+</div><!-- /.layout -->
 
 </body>
 </html>

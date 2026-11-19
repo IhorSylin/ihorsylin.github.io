@@ -1,5 +1,6 @@
 /* ---------------------------------------------------------------
-   Portfolio theme. Edit the values in :root to restyle the site.
+   Portfolio theme. Colours live in :root — change them here.
+   Layout: single column on phones, two columns from 920px up.
    --------------------------------------------------------------- */
 :root {
   --bg:        #0e1116;
@@ -9,11 +10,12 @@
   --text-dim:  #9aa7b4;
   --accent:    #6ea8fe;
   --radius: 10px;
-  --maxw: 880px;
+  --maxw: 1240px;          /* outer cap on very wide screens */
+  --sidebar: 300px;        /* left column width at desktop */
+  --gap: 56px;
   --font: ui-sans-serif, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 }
-/* Light mode: respects the visitor's OS setting. */
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
     --bg: #ffffff; --bg-card: #f6f8fa; --border: #d8dee4;
@@ -28,46 +30,72 @@ body {
   font-family: var(--font); line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
-.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* ---------- header ---------- */
-header { padding: 72px 0 40px; border-bottom: 1px solid var(--border); }
-h1 { font-size: clamp(2rem, 6vw, 2.75rem); margin: 0 0 6px; letter-spacing: -0.02em; }
-.role { color: var(--text-dim); font-size: 1.05rem; margin: 0 0 18px; }
-.links { display: flex; flex-wrap: wrap; gap: 10px; padding: 0; margin: 0; list-style: none; }
+/* ---------- layout ---------- */
+.layout { max-width: var(--maxw); margin: 0 auto; padding: 0 16px; }
+
+@media (min-width: 920px) {
+  .layout {
+    display: grid;
+    grid-template-columns: var(--sidebar) minmax(0, 1fr);
+    gap: var(--gap);
+    align-items: start;
+    padding: 0 32px;
+  }
+  .sidebar {
+    position: sticky; top: 0;
+    height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding-right: 8px;
+  }
+  main { padding: 88px 0 0; }
+  section { border-bottom: none; padding: 0 0 64px; }
+}
+
+/* ---------- sidebar ---------- */
+.sidebar { padding: 64px 0 24px; }
+h1 { font-size: clamp(2rem, 5vw, 2.6rem); margin: 0 0 6px; letter-spacing: -0.02em; }
+.role { color: var(--text-dim); font-size: 1.02rem; margin: 0 0 20px; }
+.links { display: flex; flex-wrap: wrap; gap: 9px; padding: 0; margin: 0 0 22px; list-style: none; }
 .links a {
-  display: inline-block; padding: 6px 13px; border: 1px solid var(--border);
-  border-radius: 999px; font-size: 0.9rem; color: var(--text);
+  display: inline-block; padding: 5px 12px; border: 1px solid var(--border);
+  border-radius: 999px; font-size: 0.86rem; color: var(--text);
 }
 .links a:hover { border-color: var(--accent); color: var(--accent); text-decoration: none; }
-.intro { margin: 26px 0 0; max-width: 62ch; color: var(--text-dim); }
+.intro { margin: 0; color: var(--text-dim); font-size: 0.95rem; }
 .intro strong { color: var(--text); font-weight: 600; }
 
 /* ---------- sections ---------- */
-section { padding: 48px 0; border-bottom: 1px solid var(--border); }
+section { padding: 44px 0; border-bottom: 1px solid var(--border); }
+section:last-of-type { border-bottom: none; }
 h2 {
-  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em;
-  color: var(--text-dim); margin: 0 0 22px; font-weight: 600;
+  font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.13em;
+  color: var(--text-dim); margin: 0 0 20px; font-weight: 600;
 }
 h3 { font-size: 1.05rem; margin: 0 0 6px; }
 .meta { font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); margin: 0 0 10px; }
 
 .card {
   background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px; margin-bottom: 14px;
+  border-radius: var(--radius); padding: 20px 22px; margin-bottom: 14px;
 }
 .card p { margin: 0 0 10px; color: var(--text-dim); }
 .card p:last-child { margin-bottom: 0; }
 
+/* two cards side by side once there is room */
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+.cards .card { margin-bottom: 0; }
+.card--wide { grid-column: 1 / -1; }
+
 /* ---------- skills ---------- */
-.skills { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
-.skills h4 { margin: 0 0 6px; font-size: 0.88rem; }
-.skills p { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
+.skills { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 20px; }
+.skills h4 { margin: 0 0 5px; font-size: 0.87rem; }
+.skills p { margin: 0; color: var(--text-dim); font-size: 0.89rem; }
 
 /* ---------- gallery ---------- */
-.gallery { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.gallery { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 235px), 1fr)); }
 figure { margin: 0; }
 figure img, .placeholder {
   width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
@@ -75,10 +103,11 @@ figure img, .placeholder {
 }
 .placeholder {
   display: grid; place-items: center; background: var(--bg-card);
-  color: var(--text-dim); font-family: var(--mono); font-size: 0.75rem;
+  color: var(--text-dim); font-family: var(--mono); font-size: 0.73rem;
   text-align: center; padding: 12px;
 }
-figcaption { font-size: 0.84rem; color: var(--text-dim); margin-top: 7px; }
+figcaption { font-size: 0.83rem; color: var(--text-dim); margin-top: 7px; }
 
 /* ---------- footer ---------- */
-footer { padding: 36px 0 64px; color: var(--text-dim); font-size: 0.88rem; }
+footer { padding: 28px 0 56px; color: var(--text-dim); font-size: 0.87rem; border-top: 1px solid var(--border); }
+@media (min-width: 920px) { footer { margin-top: 8px; } }
