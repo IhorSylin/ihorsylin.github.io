@@ -134,9 +134,9 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
 }
 
 /* portrait-orientation renders keep the head in frame as they grow */
-.art-row figure.anchor-top img { object-position: 50% 14%; }
+.art-row figure.anchor-top img { object-position: 50% 18%; }
 .art-row figure.anchor-top:hover img,
-.art-row figure.anchor-top:focus-within img { object-position: 50% 4%; }
+.art-row figure.anchor-top:focus-within img { object-position: 50% 11%; }
 /* when any panel is hovered or keyboard-focused, the rest give up space */
 .art-row:hover figure,
 .art-row:focus-within figure { flex-grow: 0.45; }
