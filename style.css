@@ -130,15 +130,20 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
 .art-row img {
   width: 100%; height: 440px; object-fit: cover; object-position: center;
   border: 1px solid var(--border); display: block;
-  transition: filter 350ms ease;
+  transition: filter 350ms ease, object-position 350ms cubic-bezier(.4, 0, .2, 1);
 }
+
+/* portrait-orientation renders keep the head in frame as they grow */
+.art-row figure.anchor-top img { object-position: 50% 14%; }
+.art-row figure.anchor-top:hover img,
+.art-row figure.anchor-top:focus-within img { object-position: 50% 4%; }
 /* when any panel is hovered or keyboard-focused, the rest give up space */
 .art-row:hover figure,
-.art-row:focus-within figure { flex-grow: 0.7; }
+.art-row:focus-within figure { flex-grow: 0.45; }
 .art-row:hover figure img,
 .art-row:focus-within figure img { filter: brightness(0.72); }
 .art-row figure:hover,
-.art-row figure:focus-within { flex-grow: 2.2; }
+.art-row figure:focus-within { flex-grow: 3; }
 .art-row figure:hover img,
 .art-row figure:focus-within img { filter: none; }
 
