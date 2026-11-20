@@ -83,7 +83,7 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
 /* ---------- header portrait ---------- */
 .identity { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; }
 .identity img {
-  width: 104px; height: 104px; border-radius: 0;
+  width: 104px; height: 104px; border-radius: 50%;
   object-fit: cover; border: 1px solid var(--border); flex: 0 0 auto;
 }
 .identity h1 { margin-bottom: 4px; }
