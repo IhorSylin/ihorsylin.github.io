@@ -78,6 +78,39 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
 .skills h4 { margin: 0 0 5px; font-size: 0.88rem; }
 .skills p { margin: 0; color: var(--text-dim); font-size: 0.9rem; }
 
+/* ---------- header portrait ---------- */
+.identity { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; }
+.identity img {
+  width: 104px; height: 104px; border-radius: 50%;
+  object-fit: cover; border: 1px solid var(--border); flex: 0 0 auto;
+}
+.identity h1 { margin-bottom: 4px; }
+@media (max-width: 520px) {
+  .identity { gap: 16px; }
+  .identity img { width: 76px; height: 76px; }
+}
+
+/* ---------- projects ---------- */
+.project { padding-top: 10px; margin-bottom: 40px; }
+.project:last-child { margin-bottom: 0; }
+.project h3 { font-size: 1.22rem; margin: 0 0 4px; }
+.project .meta { margin-bottom: 12px; }
+.project p { color: var(--text-dim); max-width: 68ch; margin: 0 0 12px; }
+.project p:last-of-type { margin-bottom: 16px; }
+.project .links { margin-bottom: 18px; }
+
+.shots { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.shots img, .shots video {
+  width: 100%; border-radius: var(--radius); border: 1px solid var(--border);
+  display: block; background: var(--bg-card);
+}
+figure.shot { margin: 0; }
+figure.shot figcaption { font-size: 0.82rem; color: var(--text-dim); margin-top: 7px; }
+
+/* anchored sections clear any sticky offset and get breathing room */
+.project { scroll-margin-top: 24px; }
+section { scroll-margin-top: 24px; }
+
 /* ---------- gallery ---------- */
 .gallery { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 figure { margin: 0; }

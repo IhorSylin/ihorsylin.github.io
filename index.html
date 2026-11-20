@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ihor Sylin — Full-Stack Engineer</title>
 <meta name="description" content="Full-stack engineer in Tallinn. Production services in TypeScript, React and Node. Shader programming and 3D art for games on the side.">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=7">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
 </head>
 <body>
@@ -13,12 +13,18 @@
 <div class="layout">
 
   <header>
-    <h1>Ihor Sylin</h1>
-    <p class="role">Full-Stack Engineer · Tallinn, Estonia</p>
+    <div class="identity">
+      <img src="images/portrait.jpg" alt="Ihor Sylin" width="104" height="104">
+      <div>
+        <h1>Ihor Sylin</h1>
+        <p class="role">Full-Stack Engineer · Tallinn, Estonia</p>
+      </div>
+    </div>
     <ul class="links">
       <li><a href="https://github.com/IhorSylin">GitHub</a></li>
       <li><a href="https://www.linkedin.com/in/ihor-sylin-950201330">LinkedIn</a></li>
       <li><a href="mailto:basilisk.fly@gmail.com">Email</a></li>
+      <li><a href="#projects">Projects</a></li>
     </ul>
     <p class="intro">
       I build and run production software — <strong>React and TypeScript</strong> over
@@ -81,78 +87,85 @@
       </div>
     </section>
 
-    <section id="games">
-      <h2>Games &amp; 3D</h2>
-      <div class="cards">
+    <section id="projects">
+      <h2>Projects</h2>
 
-        <div class="card card--wide">
-          <h3>Wolf-Hunter — solo 2D action game</h3>
-          <p class="meta">C++ · raylib · no engine · <a href="https://github.com/IhorSylin/Wolf-Hunter">source</a></p>
-          <p>
-            ~56 KB of hand-written C++: tile collision over a 98×65 grid, eight enemy state
-            machines with independent cooldown timers, two weapon systems with combo chains
-            and projectiles, a dodge roll with invulnerability frames, binary save/load, and
-            its own sprite-animation framework. Art and Tiled maps are mine too.
-          </p>
+      <div class="project" id="dwarf-escape">
+        <h3>Dwarf Escape</h3>
+        <p class="meta">Godot 4 · 4–6 person team · 3D environment art &amp; materials</p>
+        <p>
+          A first-person platformer set in a dwarven mine — a pickaxe jump, a grappling hook,
+          and a timer running in the corner. I made the environment art and the materials:
+          the cave and architecture geometry, the tileable rock and brick textures, and the
+          lava that lights most of the level.
+        </p>
+        <p>
+          We showcased it twice at game-dev expo events and ran tournaments on it.
+        </p>
+        <ul class="links">
+          <li><a href="https://github.com/P3-J/jamjamjam">Source on GitHub</a></li>
+        </ul>
+        <div class="shots">
+          <figure class="shot" style="grid-column: 1 / -1">
+            <video src="images/dwarf-escape-gameplay.mp4" poster="images/dwarf-escape-poster.jpg"
+                   controls preload="none" playsinline></video>
+            <figcaption>Gameplay — level 1, start to finish.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/dwarf-escape-1.jpg" alt="Dwarf Escape — lava-lit mine interior" loading="lazy">
+            <figcaption>Level 1 — the lava is the main light source, so the readable path had to come out of the material work.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="images/dwarf-escape-2.jpg" alt="Dwarf Escape — second view of level 1" loading="lazy">
+            <figcaption>Level 1, further in.</figcaption>
+          </figure>
         </div>
-
-        <div class="card">
-          <h3>Shader programming — Godot 4</h3>
-          <p class="meta">GDShader / GLSL</p>
-          <p>
-            A modular cel-shading system: a base shader include plus eight feature modules —
-            normal mapping, emission, reflections, occlusion, anisotropy, backlight,
-            refraction, transparency — composed at compile time into per-object materials,
-            with matching inverted-hull outline shaders. Reused across three projects.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Team projects — Godot 4</h3>
-          <p class="meta">2024 – present · incl. Global Game Jam Tallinn 2025</p>
-          <p>
-            Five projects with a recurring 4–6 person team, contributing 3D environment art
-            and materials. Full asset pipeline end to end: modelled in Blender and Maya,
-            exported to FBX/glTF, composed into the Godot scenes that consume them — plus
-            TrenchBroom level blockouts, UV unwrapping, mesh-map baking and PBR texturing.
-          </p>
-          <p><a href="https://github.com/P3-J/jamjamjam">Dwarf Escape on GitHub</a></p>
-        </div>
-
       </div>
-    </section>
 
-    <section id="gallery">
-      <h2>3D Work</h2>
-      <!-- TO ADD A PIECE: drop the file in images/, then replace the
-           <div class="placeholder">…</div> below with:
-           <img src="images/your-file.jpg" alt="short description"> -->
-      <div class="gallery">
-        <figure>
-          <div class="placeholder">images/piece-1.jpg<br>final render</div>
-          <figcaption>Replace me — final render, with poly count.</figcaption>
-        </figure>
-        <figure>
-          <div class="placeholder">images/piece-1-wires.jpg<br>wireframe</div>
-          <figcaption>Replace me — wireframe. Show the topology.</figcaption>
-        </figure>
-        <figure>
-          <div class="placeholder">images/piece-1-uv.jpg<br>UV layout</div>
-          <figcaption>Replace me — UV layout and bakes.</figcaption>
-        </figure>
-        <figure>
-          <div class="placeholder">images/piece-2.jpg</div>
-          <figcaption>Replace me.</figcaption>
-        </figure>
-        <figure>
-          <div class="placeholder">images/piece-3.jpg</div>
-          <figcaption>Replace me.</figcaption>
-        </figure>
-        <figure>
-          <div class="placeholder">images/gameplay.jpg<br>video thumbnail</div>
-          <figcaption>Replace me — or embed a YouTube clip here.</figcaption>
-        </figure>
+      <div class="project" id="wolf-hunter">
+        <h3>Wolf-Hunter</h3>
+        <p class="meta">C++ · raylib · no engine · solo</p>
+        <p>
+          A 2D action game written directly on raylib, with no engine underneath. Everything
+          is hand-rolled: tile collision, enemy state machines, two weapon systems with combo
+          timers and projectiles, a dodge roll with invulnerability frames, and binary
+          save/load. The art and the Tiled maps are mine too.
+        </p>
+        <p>
+          It is the project where I found out what an engine actually does for you, by not
+          having one.
+        </p>
+        <ul class="links">
+          <li><a href="https://github.com/IhorSylin/Wolf-Hunter">Source on GitHub</a></li>
+        </ul>
+        <div class="shots">
+          <figure class="shot" style="grid-column: 1 / -1">
+            <video src="images/wolf-hunter-gameplay.mp4" poster="images/wolf-hunter-poster.jpg"
+                   controls preload="none" playsinline></video>
+            <figcaption>Gameplay — combat, the bow, and the dodge roll.</figcaption>
+          </figure>
+        </div>
       </div>
+
+      <div class="project" id="art">
+        <h3>3D art</h3>
+        <p class="meta">Blender · Maya · ZBrush · Substance Painter</p>
+        <p>
+          Four years of 3D alongside everything else. Hard-surface modelling and sculpting,
+          UV unwrapping, baking, and texturing — both hand-painted and realistic PBR. These
+          are personal pieces rather than game assets.
+        </p>
+        <div class="shots">
+          <figure class="shot"><img src="images/mr-handy-1.jpg" alt="Mr Handy robot render" loading="lazy"><figcaption>Hard-surface robot — worn metal, rust and emissive pass.</figcaption></figure>
+          <figure class="shot"><img src="images/mr-handy-2.jpg" alt="Mr Handy robot, second angle" loading="lazy"><figcaption>Same model, second angle.</figcaption></figure>
+          <figure class="shot"><img src="images/protectron-1.jpg" alt="Protectron worker render" loading="lazy"><figcaption>Protectron worker.</figcaption></figure>
+          <figure class="shot"><img src="images/protectron-2.jpg" alt="Protectron worker, second angle" loading="lazy"><figcaption>Protectron worker, second angle.</figcaption></figure>
+          <figure class="shot"><img src="images/render-main-1.jpg" alt="Render" loading="lazy"><figcaption>Caption me.</figcaption></figure>
+          <figure class="shot"><img src="images/render-main-2.jpg" alt="Render" loading="lazy"><figcaption>Caption me.</figcaption></figure>
+          <figure class="shot"><img src="images/scholar.jpg" alt="Scholar character render" loading="lazy"><figcaption>Scholar — high-poly sculpt.</figcaption></figure>
+        </div>
+      </div>
+
     </section>
 
     <footer>
