@@ -163,8 +163,9 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
 figure.shot { margin: 0; }
 
 /* anchored sections clear any sticky offset and get breathing room */
-.project { scroll-margin-top: 24px; }
-section { scroll-margin-top: 24px; }
+/* breathing room above an element you jump to via #anchor */
+.project { scroll-margin-top: 56px; }
+section { scroll-margin-top: 56px; }
 
 /* ---------- small projects ---------- */
 .small-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 22px; }
