@@ -161,6 +161,16 @@ figure.shot { margin: 0; }
 .project { scroll-margin-top: 24px; }
 section { scroll-margin-top: 24px; }
 
+/* ---------- small projects ---------- */
+.small-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 22px; }
+.small-list > li { padding-top: 16px; border-top: 1px solid var(--border); }
+.small-list > li:first-child { border-top: none; padding-top: 0; }
+.small-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin: 0 0 4px; }
+.small-head h4 { margin: 0; font-size: 1.06rem; }
+.small-head .when { font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); }
+.small-list p { color: var(--text-dim); max-width: 68ch; margin: 0 0 8px; }
+.small-list .links { margin: 0; }
+
 /* ---------- gallery ---------- */
 .gallery { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 figure { margin: 0; }
