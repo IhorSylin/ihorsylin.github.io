@@ -121,11 +121,36 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
 .shots { display: grid; gap: 18px; grid-template-columns: 1fr; }
 
 /* the 3D render gallery keeps a multi-column grid */
-.art-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
-.art-grid img {
-  width: 100%; border-radius: 0; border: 1px solid var(--border); display: block;
+/* three renders side by side; hovering one widens it and narrows the others */
+.art-row { display: flex; gap: 12px; }
+.art-row figure {
+  margin: 0; min-width: 0; flex: 1 1 0;
+  transition: flex-grow 350ms cubic-bezier(.4, 0, .2, 1);
 }
-.art-grid figure { margin: 0; }
+.art-row img {
+  width: 100%; height: 440px; object-fit: cover; object-position: center;
+  border: 1px solid var(--border); display: block;
+  transition: filter 350ms ease;
+}
+/* when any panel is hovered or keyboard-focused, the rest give up space */
+.art-row:hover figure,
+.art-row:focus-within figure { flex-grow: 0.7; }
+.art-row:hover figure img,
+.art-row:focus-within figure img { filter: brightness(0.72); }
+.art-row figure:hover,
+.art-row figure:focus-within { flex-grow: 2.2; }
+.art-row figure:hover img,
+.art-row figure:focus-within img { filter: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .art-row figure, .art-row img { transition: none; }
+}
+/* no hover on touch, and three panels are too narrow on a phone */
+@media (max-width: 700px) {
+  .art-row { flex-direction: column; }
+  .art-row figure { flex: none; }
+  .art-row img { height: 300px; }
+}
 .shots img, .shots video {
   width: 100%; border-radius: 0; border: 1px solid var(--border);
   display: block; background: var(--bg-card);
