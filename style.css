@@ -111,7 +111,7 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
 .project .meta { margin-bottom: 0; }
 .project-meta {
   display: flex; flex-wrap: wrap; align-items: center;
-  gap: 10px 14px; margin: 0 0 14px;
+  gap: 8px 14px; margin: 0 0 6px;
 }
 .project-meta .links { margin: 0; }
 .project p { color: var(--text-dim); max-width: 68ch; margin: 0 0 12px; }
