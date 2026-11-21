@@ -108,7 +108,9 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
   margin: 0 0 6px;
   line-height: 1.15;
 }
-.project .meta { margin-bottom: 0; }
+.project .meta { margin-bottom: 6px; }
+/* when the keyword line shares a row with links, the row owns the spacing */
+.project-meta .meta { margin-bottom: 0; }
 .project-meta {
   display: flex; flex-wrap: wrap; align-items: center;
   gap: 8px 14px; margin: 0 0 6px;
@@ -171,7 +173,7 @@ section { scroll-margin-top: 56px; }
 .small-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 22px; }
 .small-list > li { padding-top: 16px; border-top: 1px solid var(--border); }
 .small-list > li:first-child { border-top: none; padding-top: 0; }
-.small-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin: 0 0 4px; }
+.small-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin: 0 0 6px; }
 .small-head h4 { margin: 0; font-size: 1.06rem; }
 .small-head .when { font-family: var(--mono); font-size: 0.78rem; color: var(--text-dim); }
 .small-list p { color: var(--text-dim); max-width: 68ch; margin: 0 0 8px; }
