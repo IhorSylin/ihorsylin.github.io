@@ -16,16 +16,44 @@
 (function () {
   if (!location.hash) return;
   var root = document.documentElement;
+  var target = null;
+  var done = false;
   root.style.scrollBehavior = 'auto';
+
   function jump() {
-    var el = null;
-    try { el = document.querySelector(location.hash); } catch (e) { return; }
-    if (el) el.scrollIntoView();
+    if (done) return;
+    if (!target) {
+      try { target = document.querySelector(location.hash); } catch (e) { done = true; return; }
+    }
+    if (target) target.scrollIntoView();
   }
-  document.addEventListener('DOMContentLoaded', jump);
-  window.addEventListener('load', function () {
+
+  function release() {
+    if (done) return;
+    done = true;
+    if (observer) observer.disconnect();
+    root.style.scrollBehavior = '';
+  }
+
+  var observer = null;
+  document.addEventListener('DOMContentLoaded', function () {
     jump();
-    requestAnimationFrame(function () { root.style.scrollBehavior = ''; });
+    /* Images and video above the target settle on their real height after the
+       jump, which pushes the target down the page. Keep it pinned until the
+       layout stops moving — but hand control straight back the moment the
+       reader touches the page themselves. */
+    if (typeof ResizeObserver === 'function') {
+      observer = new ResizeObserver(jump);
+      observer.observe(document.body);
+    }
+    ['wheel', 'touchstart', 'keydown'].forEach(function (evt) {
+      window.addEventListener(evt, release, { once: true, passive: true });
+    });
+    window.addEventListener('load', function () {
+      jump();
+      setTimeout(release, 500);
+    });
+    setTimeout(release, 3000);
   });
 })();
 </script>
@@ -231,13 +259,13 @@
         <div class="shots">
           <figure class="shot">
             <video src="images/dwarf-escape-loop.mp4?v=2" poster="images/dwarf-escape-poster.jpg?v=2"
-                   autoplay loop muted playsinline></video>
+                   width="1152" height="648" autoplay loop muted playsinline></video>
           </figure>
           <figure class="shot">
-            <img src="images/dwarf-escape-1.jpg" alt="Dwarf Escape — lava-lit mine interior" loading="lazy">
+            <img src="images/dwarf-escape-1.jpg" alt="Dwarf Escape — lava-lit mine interior" width="1600" height="900" loading="lazy">
           </figure>
           <figure class="shot">
-            <img src="images/dwarf-escape-2.jpg" alt="Dwarf Escape — second view of level 1" loading="lazy">
+            <img src="images/dwarf-escape-2.jpg" alt="Dwarf Escape — second view of level 1" width="1600" height="900" loading="lazy">
           </figure>
         </div>
       </div>
@@ -264,7 +292,7 @@
         <div class="shots">
           <figure class="shot">
             <video src="images/wolf-hunter-loop.mp4?v=2" poster="images/wolf-hunter-poster.jpg"
-                   autoplay loop muted playsinline></video>
+                   width="1152" height="648" autoplay loop muted playsinline></video>
           </figure>
         </div>
       </div>
@@ -278,9 +306,9 @@
           are personal pieces rather than game assets.
         </p>
         <div class="art-row">
-            <figure><img src="images/protectron-1.jpg" alt="Protectron worker render" tabindex="0"></figure>
-            <figure class="anchor-top"><img src="images/scholar.jpg" alt="Scholar character render" tabindex="0"></figure>
-            <figure><img src="images/mr-handy-1.jpg" alt="Mr Handy robot render" tabindex="0"></figure>
+            <figure><img src="images/protectron-1.jpg" alt="Protectron worker render" width="1600" height="900" tabindex="0"></figure>
+            <figure class="anchor-top"><img src="images/scholar.jpg" alt="Scholar character render" width="1054" height="1600" tabindex="0"></figure>
+            <figure><img src="images/mr-handy-1.jpg" alt="Mr Handy robot render" width="1600" height="900" tabindex="0"></figure>
           </div>
       </div>
 
