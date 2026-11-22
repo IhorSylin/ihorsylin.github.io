@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ihor Sylin — Full-Stack Engineer</title>
 <meta name="description" content="Full-stack engineer in Tallinn. Two years on production subscription billing — TypeScript, React, Node and Kafka. Games and 3D art on the side.">
-<link rel="stylesheet" href="style.css?v=35">
+<link rel="stylesheet" href="style.css?v=36">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
 </head>
 <body>
@@ -157,7 +157,7 @@
           <ul class="points">
             <li>Feature flags per offer, segment and plan tier, shipped dark then rolled out in staggered slots</li>
             <li>Migrations for the promotion rows, each with a JSON eligibility filter naming the flag that gates it, plus Redis cache-version bumps so existing customers pick them up</li>
-            <li>Node script for teardown — resolves each company&rsquo;s region, reads live discounts, drops expired ones, intersects the campaign&rsquo;s IDs, then removes. Idempotent, rate-limited, ~4,000 removed across 30 production runs</li>
+            <li>Node script for teardown — a destructive bulk operation against live billing data, so it reads each account&rsquo;s current discounts first, skips anything already expired or outside the campaign, and logs a reason per account rather than a count. ~4,000 removed across 30 production runs</li>
             <li>Redemptions measured with LogQL against production logs; the figure reconciled with marketing&rsquo;s own</li>
           </ul>
           <p class="outcome">
