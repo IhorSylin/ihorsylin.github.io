@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ihor Sylin — Full-Stack Engineer</title>
 <meta name="description" content="Full-stack engineer in Tallinn. Two years on production subscription billing — TypeScript, React, Node and Kafka. Games and 3D art on the side.">
-<link rel="stylesheet" href="style.css?v=34">
+<link rel="stylesheet" href="style.css?v=35">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
 </head>
 <body>
@@ -97,23 +97,17 @@
           </div>
           <p>
             The old design picked a customer&rsquo;s price variant at sign-up — before the data
-            that excludes sales-assigned and partner-referred accounts exists. Those accounts
-            landed in variants they should have been out of, and the exposure event had
-            already counted them.
+            that excludes sales-assigned and partner-referred accounts exists.
           </p>
           <ul class="points">
-            <li>Built a Kafka consumer on a company-wide topic that re-evaluates eligibility whenever sales or partner data changes</li>
-            <li>Added public and private evaluation endpoints holding a config map from experiment variant to the feature flags it enables</li>
-            <li>Passed sales and partner attributes into the Amplitude variant fetch, so exclusion rules change without a deploy</li>
-            <li>Made the two paths asymmetric — events can enable or disable a variant, the billing page can only enable</li>
-            <li>Disabled the master eligibility flag the moment a customer enters billing details, so a late event cannot move a committed price</li>
-            <li>Created real plans in the product catalogue rather than discounts, since a customer can only hold one discount at a time</li>
-            <li>Wrote the architecture decision record; it passed review, and a later one builds on it</li>
+            <li>Kafka consumer on a company-wide topic re-evaluates eligibility whenever that data changes</li>
+            <li>Config map from experiment variant to feature flags, so exclusion rules change without a deploy</li>
+            <li>Asymmetric paths — events can enable or disable a variant, the billing page can only enable</li>
+            <li>Master flag switches off when a customer enters billing details, so a late event cannot move a committed price</li>
           </ul>
           <p class="outcome">
-            <strong>Outcome:</strong> both experiments ran to a decision. The winning variant
-            became the company&rsquo;s new pricing baseline, and later rounds ran on the same
-            platform.
+            <strong>Outcome:</strong> both experiments ran to a decision. The winner became the
+            company&rsquo;s new pricing baseline, and later rounds ran on the same platform.
           </p>
         </li>
 
@@ -124,20 +118,17 @@
           </div>
           <p>
             Removing an add-on from thousands of subscriptions meant driving the general
-            subscription endpoint, where the caller composes the entire subscription it wants.
-            Fine for a person clicking in the product; dangerous in a loop.
+            subscription endpoint, where the caller composes the whole subscription. Fine once,
+            dangerous in a loop.
           </p>
           <ul class="points">
-            <li>Built a single-purpose private endpoint taking a company id and a product code</li>
-            <li>Returned a closed enum — removed now, removal scheduled, was never there — so a batch driver switches on a fixed set instead of parsing messages</li>
-            <li>Treated &ldquo;never had it&rdquo; as success rather than an error, and refused reseller-managed companies outright</li>
-            <li>Wrapped each downstream call in its own try/catch and log line, then rethrew, so a failure is attributable and the caller still hears about it</li>
-            <li>Shipped unit and functional tests in the same commit</li>
+            <li>Single-purpose private endpoint: company id, product code</li>
+            <li>Closed enum of outcomes — removed, scheduled, never there — so a batch driver switches instead of parsing messages</li>
+            <li>Per-dependency try/catch, log line and rethrow, so failures are attributable and the caller still hears them</li>
           </ul>
           <p class="outcome">
-            <strong>Outcome:</strong> two months later another engineer extended it for a
-            different product; a month after that a service from elsewhere in the company
-            started calling it. It is now the normal way to remove an add-on.
+            <strong>Outcome:</strong> another engineer extended it for a different product two
+            months later; a service from elsewhere in the company now calls it too.
           </p>
         </li>
 
@@ -147,15 +138,14 @@
             <span class="when">2026 · Node · MySQL · cross-team launch</span>
           </div>
           <p>
-            Access to the add-on came from a feature flag attached to the package a company had
-            bought. Making it free meant re-deriving access from the plan instead, for every
-            existing customer, without a gap.
+            Access came from a feature flag on the package a company had bought. Making the
+            add-on free meant re-deriving it from the plan, for every existing customer, without
+            a gap.
           </p>
           <ul class="points">
-            <li>Moved the entitlement onto plan features in one migration, then severed the package-to-flag link in a second — in that order</li>
-            <li>Shipped each change as a matched pair with the reconciliation service, which otherwise repairs the drift straight back</li>
-            <li>Added exception flags for companies that had to stay excluded, because a plan change recomputes entitlements from the plan&rsquo;s configuration rather than current state</li>
-            <li>Extended the promotion length so customers mid-trial would not convert to paying for something about to be free</li>
+            <li>Entitlement moved onto plan features in one migration, the package-to-flag link severed in a second — in that order</li>
+            <li>Each change shipped as a matched pair with the reconciliation service, which otherwise repairs the drift straight back</li>
+            <li>Exception flags for companies that had to stay excluded, since a plan change recomputes entitlements from configuration, not current state</li>
           </ul>
         </li>
 
@@ -164,28 +154,16 @@
             <h4>Seasonal revenue campaigns</h4>
             <span class="when">2025&ndash;2026 · seven shipped · Node · MySQL · Redis · React</span>
           </div>
-          <p>
-            The same pipeline every time, across six services:
-          </p>
           <ul class="points">
-            <li>Feature flags per offer, segment and plan tier, shipped dark and then rolled out in staggered slots</li>
-            <li>Database migrations for the promotion rows, each carrying a JSON eligibility filter that names the flag gating it</li>
-            <li>Redis cache-version bumps so existing customers pick up the new promotions</li>
-            <li>Discount links and redemption rules, and the React work on plan cards and checkout — discounted and crossed-out prices, campaign copy in five languages</li>
-          </ul>
-          <p>
-            Teardown is the half with no tooling: discounts stay on accounts that never
-            converted, and nothing removes them in bulk.
-          </p>
-          <ul class="points">
-            <li>Wrote a Node script that resolves each company&rsquo;s region, reads its live discounts, drops the expired ones, intersects against the campaign&rsquo;s discount IDs, and only then removes</li>
-            <li>Idempotent and rate-limited, logging a reason per company rather than a count — around 4,000 discounts removed across 30 production runs</li>
-            <li>Measured redemptions with LogQL against production logs; the figure reconciled with marketing&rsquo;s own</li>
+            <li>Feature flags per offer, segment and plan tier, shipped dark then rolled out in staggered slots</li>
+            <li>Migrations for the promotion rows, each with a JSON eligibility filter naming the flag that gates it, plus Redis cache-version bumps so existing customers pick them up</li>
+            <li>Node script for teardown — resolves each company&rsquo;s region, reads live discounts, drops expired ones, intersects the campaign&rsquo;s IDs, then removes. Idempotent, rate-limited, ~4,000 removed across 30 production runs</li>
+            <li>Redemptions measured with LogQL against production logs; the figure reconciled with marketing&rsquo;s own</li>
           </ul>
           <p class="outcome">
             <strong>Found along the way:</strong> the redemption validator nested the
-            billing-cycle check inside the tier check, so a discount restricted to monthly
-            subscriptions was not actually restricted — an annual customer could redeem it.
+            billing-cycle check inside the tier check, so a monthly-only discount could be
+            redeemed by an annual customer.
           </p>
         </li>
       </ul>
