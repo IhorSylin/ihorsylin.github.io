@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ihor Sylin — Full-Stack Engineer</title>
 <meta name="description" content="Full-stack engineer in Tallinn. Two years on production subscription billing — TypeScript, React, Node and Kafka. Games and 3D art on the side.">
-<link rel="stylesheet" href="style.css?v=33">
+<link rel="stylesheet" href="style.css?v=34">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
 </head>
 <body>
@@ -93,19 +93,22 @@
         <li>
           <div class="small-head">
             <h4>A platform for pricing experiments</h4>
-            <span class="when">2026 · led a five-person cross-functional team</span>
+            <span class="when">2026 · Kafka · Node · Amplitude · feature flags</span>
           </div>
           <p>
-            Pricing ran in two market clusters. Testing real prices on live trial customers
-            meant deciding who sees them and keeping that decision right everywhere at once —
-            and the data that excludes sales-assigned and partner-referred accounts only
-            arrives after sign-up, which is when the old design decided.
+            The old design picked a customer&rsquo;s price variant at sign-up — before the data
+            that excludes sales-assigned and partner-referred accounts exists. Those accounts
+            landed in variants they should have been out of, and the exposure event had
+            already counted them.
           </p>
           <ul class="points">
-            <li>Replaced sign-up evaluation with an event-driven design — a consumer on a company-wide topic re-evaluates whenever eligibility data changes</li>
-            <li>Locked a company&rsquo;s price the moment they enter billing details</li>
-            <li>Shipped an interim billing-page version first, then superseded it</li>
-            <li>Wrote the architecture decision record; it passed company review, and a later one builds on it</li>
+            <li>Built a Kafka consumer on a company-wide topic that re-evaluates eligibility whenever sales or partner data changes</li>
+            <li>Added public and private evaluation endpoints holding a config map from experiment variant to the feature flags it enables</li>
+            <li>Passed sales and partner attributes into the Amplitude variant fetch, so exclusion rules change without a deploy</li>
+            <li>Made the two paths asymmetric — events can enable or disable a variant, the billing page can only enable</li>
+            <li>Disabled the master eligibility flag the moment a customer enters billing details, so a late event cannot move a committed price</li>
+            <li>Created real plans in the product catalogue rather than discounts, since a customer can only hold one discount at a time</li>
+            <li>Wrote the architecture decision record; it passed review, and a later one builds on it</li>
           </ul>
           <p class="outcome">
             <strong>Outcome:</strong> both experiments ran to a decision. The winning variant
@@ -117,19 +120,19 @@
         <li>
           <div class="small-head">
             <h4>An endpoint that outgrew what I built it for</h4>
-            <span class="when">2026 · Node · internal API</span>
+            <span class="when">2026 · Node · internal API design</span>
           </div>
           <p>
-            We needed to remove an add-on from thousands of subscriptions. The platform&rsquo;s
-            one subscription endpoint was built for a person clicking in the product — the
-            caller composes the entire subscription it wants, which is fine once and dangerous
-            thousands of times.
+            Removing an add-on from thousands of subscriptions meant driving the general
+            subscription endpoint, where the caller composes the entire subscription it wants.
+            Fine for a person clicking in the product; dangerous in a loop.
           </p>
           <ul class="points">
-            <li>Built a single-purpose endpoint instead: company, product code, done</li>
-            <li>Handled the four things &ldquo;remove this add-on&rdquo; can mean — now, scheduled, never had it, reseller-managed</li>
-            <li>Returned a fixed set of outcomes so a batch job can tell &ldquo;nothing to do&rdquo; from &ldquo;this failed&rdquo;</li>
-            <li>Gave every dependency its own log line on failure</li>
+            <li>Built a single-purpose private endpoint taking a company id and a product code</li>
+            <li>Returned a closed enum — removed now, removal scheduled, was never there — so a batch driver switches on a fixed set instead of parsing messages</li>
+            <li>Treated &ldquo;never had it&rdquo; as success rather than an error, and refused reseller-managed companies outright</li>
+            <li>Wrapped each downstream call in its own try/catch and log line, then rethrew, so a failure is attributable and the caller still hears about it</li>
+            <li>Shipped unit and functional tests in the same commit</li>
           </ul>
           <p class="outcome">
             <strong>Outcome:</strong> two months later another engineer extended it for a
@@ -141,37 +144,49 @@
         <li>
           <div class="small-head">
             <h4>Making a paid add-on free</h4>
-            <span class="when">2026 · billing side of a cross-team launch</span>
+            <span class="when">2026 · Node · MySQL · cross-team launch</span>
           </div>
           <p>
-            Access came from a flag attached to the package a company had bought. Making the
-            add-on free meant re-deriving access from the plan instead — for every existing
-            customer, without anyone losing access for a single request.
+            Access to the add-on came from a feature flag attached to the package a company had
+            bought. Making it free meant re-deriving access from the plan instead, for every
+            existing customer, without a gap.
           </p>
           <ul class="points">
-            <li>Shipped every change as a matched pair with the reconciliation service, which otherwise repairs exactly the drift the migration creates</li>
-            <li>Handled plan upgrades, which recompute entitlements from configuration rather than current state — so an excluded customer would silently get access back</li>
-            <li>Sorted affected companies into five groups and wrote the removal runbook as a decision tree</li>
-            <li>Worked the failures company by company on launch day</li>
+            <li>Moved the entitlement onto plan features in one migration, then severed the package-to-flag link in a second — in that order</li>
+            <li>Shipped each change as a matched pair with the reconciliation service, which otherwise repairs the drift straight back</li>
+            <li>Added exception flags for companies that had to stay excluded, because a plan change recomputes entitlements from the plan&rsquo;s configuration rather than current state</li>
+            <li>Extended the promotion length so customers mid-trial would not convert to paying for something about to be free</li>
           </ul>
         </li>
 
         <li>
           <div class="small-head">
             <h4>Seasonal revenue campaigns</h4>
-            <span class="when">2025&ndash;2026 · seven shipped</span>
+            <span class="when">2025&ndash;2026 · seven shipped · Node · MySQL · Redis · React</span>
           </div>
           <p>
-            A campaign looks like a banner and a discount. Underneath it is a matrix — several
-            offers, several customer segments and several plan tiers, each combination needing
-            its own promotion, feature flag and eligibility rule.
+            The same pipeline every time, across six services:
           </p>
           <ul class="points">
-            <li>Seven campaigns over two years, each correct on the morning it launched</li>
-            <li>Went from owning the back end while another engineer built the front, to writing both halves</li>
-            <li>Reviewed his in between</li>
-            <li>Wrote the teardown scripts — resolve each company&rsquo;s region, check what it actually holds, skip with a stated reason</li>
+            <li>Feature flags per offer, segment and plan tier, shipped dark and then rolled out in staggered slots</li>
+            <li>Database migrations for the promotion rows, each carrying a JSON eligibility filter that names the flag gating it</li>
+            <li>Redis cache-version bumps so existing customers pick up the new promotions</li>
+            <li>Discount links and redemption rules, and the React work on plan cards and checkout — discounted and crossed-out prices, campaign copy in five languages</li>
           </ul>
+          <p>
+            Teardown is the half with no tooling: discounts stay on accounts that never
+            converted, and nothing removes them in bulk.
+          </p>
+          <ul class="points">
+            <li>Wrote a Node script that resolves each company&rsquo;s region, reads its live discounts, drops the expired ones, intersects against the campaign&rsquo;s discount IDs, and only then removes</li>
+            <li>Idempotent and rate-limited, logging a reason per company rather than a count — around 4,000 discounts removed across 30 production runs</li>
+            <li>Measured redemptions with LogQL against production logs; the figure reconciled with marketing&rsquo;s own</li>
+          </ul>
+          <p class="outcome">
+            <strong>Found along the way:</strong> the redemption validator nested the
+            billing-cycle check inside the tier check, so a discount restricted to monthly
+            subscriptions was not actually restricted — an annual customer could redeem it.
+          </p>
         </li>
       </ul>
 
