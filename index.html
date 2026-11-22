@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ihor Sylin — Full-Stack Engineer</title>
 <meta name="description" content="Full-stack engineer in Tallinn. Two years on production subscription billing — TypeScript, React, Node and Kafka. Games and 3D art on the side.">
-<link rel="stylesheet" href="style.css?v=36">
+<link rel="stylesheet" href="style.css?v=37">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
 </head>
 <body>
@@ -42,26 +42,23 @@
       <div class="card">
         <h3>Pipedrive — Junior Software Engineer</h3>
         <p class="meta">Jan 2025 – Dec 2026 · Billing &amp; Monetization · Tallinn</p>
+        <p class="meta">TypeScript · React · Node.js · MySQL · Apache Kafka · Docker</p>
         <p>
           Subscription billing — a domain where one subscription can carry discounts,
           scheduled changes and a legacy plan at once, and every combination has to stay
           correct across the product, the invoice and the data warehouse.
         </p>
         <p>
-          Most of my work sat in pricing and packaging: the experiment platform below, a
+          I led a five-person cross-functional mission — product, design, engineering and a
+          business lead at head-of-department level — that rebuilt how customers are
+          evaluated into pricing experiments. The rest was pricing and packaging: a
           company-wide change to what customers get for their money, and the seasonal
-          campaigns that run on top of all of it. I usually owned a change the whole way —
-          database migration, service, endpoint, page.
+          campaigns that run on top of it. I owned those the whole way — database migration,
+          service, endpoint, page.
         </p>
         <p>
-          I reviewed about as much as I wrote: 218 of other engineers' pull requests, a lot
-          of them from people far more senior than me. The two catches I'd stand behind were
-          both in services I didn't own.
-        </p>
-        <p>
-          I also built small tools for the work I did repeatedly — two Claude Code skills for
-          my team, and a set of scripts for the bulk billing operations that every campaign
-          ends with.
+          I also built two Claude Code skills for my team, and the scripts that run the bulk
+          billing operations every campaign ends with.
         </p>
       </div>
 
@@ -100,7 +97,7 @@
             that excludes sales-assigned and partner-referred accounts exists.
           </p>
           <ul class="points">
-            <li>Kafka consumer on a company-wide topic re-evaluates eligibility whenever that data changes</li>
+            <li>Four services, built end to end on my own, around a Kafka consumer on a company-wide topic that re-evaluates eligibility whenever that data changes</li>
             <li>Config map from experiment variant to feature flags, so exclusion rules change without a deploy</li>
             <li>Asymmetric paths — events can enable or disable a variant, the billing page can only enable</li>
             <li>Master flag switches off when a customer enters billing details, so a late event cannot move a committed price</li>
@@ -154,6 +151,10 @@
             <h4>Seasonal revenue campaigns</h4>
             <span class="when">2025&ndash;2026 · seven shipped · Node · MySQL · Redis · React</span>
           </div>
+          <p>
+            On the 2025 year-end campaign I owned the design and was engineering&rsquo;s point
+            of contact for the business side.
+          </p>
           <ul class="points">
             <li>Feature flags per offer, segment and plan tier, shipped dark then rolled out in staggered slots</li>
             <li>Migrations for the promotion rows, each with a JSON eligibility filter naming the flag that gates it, plus Redis cache-version bumps so existing customers pick them up</li>
