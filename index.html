@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ihor Sylin — Full-Stack Engineer</title>
 <meta name="description" content="Full-stack engineer in Tallinn. Two years on production subscription billing — TypeScript, React, Node and Kafka. Games and 3D art on the side.">
-<link rel="stylesheet" href="style.css?v=32">
+<link rel="stylesheet" href="style.css?v=33">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
 </head>
 <body>
@@ -96,29 +96,21 @@
             <span class="when">2026 · led a five-person cross-functional team</span>
           </div>
           <p>
-            The company priced in two market clusters — one set of prices for each, whatever
-            the local conditions. To find out whether that was too blunt, we had to run real
-            price tests on live trial customers.
+            Pricing ran in two market clusters. Testing real prices on live trial customers
+            meant deciding who sees them and keeping that decision right everywhere at once —
+            and the data that excludes sales-assigned and partner-referred accounts only
+            arrives after sign-up, which is when the old design decided.
           </p>
-          <p>
-            The hard part wasn't showing different prices. It was deciding who sees them and
-            keeping that decision correct everywhere at once. The data you need to exclude
-            sales-assigned and partner-referred accounts arrives shortly after sign-up, which
-            is exactly when the old design decided — so those accounts landed in the wrong
-            groups. And a salesperson quoting from the back office has to see the price the
-            customer will actually get.
-          </p>
-          <p>
-            I shipped an interim fix, then replaced it with an event-driven design: a consumer
-            on a company-wide event topic re-evaluates eligibility whenever that data changes,
-            and the whole thing locks the moment a customer commits to a price. I wrote the
-            architecture decision record behind it, which passed the company's review. A later
-            decision record names mine as the document it builds on, and I reviewed that one.
-          </p>
-          <p>
-            Both experiments ran to a decision. The winning variant became the company's new
-            pricing baseline, and the next rounds ran on the same platform after I'd moved off
-            the project.
+          <ul class="points">
+            <li>Replaced sign-up evaluation with an event-driven design — a consumer on a company-wide topic re-evaluates whenever eligibility data changes</li>
+            <li>Locked a company&rsquo;s price the moment they enter billing details</li>
+            <li>Shipped an interim billing-page version first, then superseded it</li>
+            <li>Wrote the architecture decision record; it passed company review, and a later one builds on it</li>
+          </ul>
+          <p class="outcome">
+            <strong>Outcome:</strong> both experiments ran to a decision. The winning variant
+            became the company&rsquo;s new pricing baseline, and later rounds ran on the same
+            platform.
           </p>
         </li>
 
@@ -128,24 +120,21 @@
             <span class="when">2026 · Node · internal API</span>
           </div>
           <p>
-            We needed to remove an add-on from thousands of subscriptions. The platform had
-            one endpoint for changing a subscription and it was built for a person clicking
-            in the product: the caller composes the entire subscription it wants. Driving
-            that from a migration means recomposing a whole subscription correctly, thousands
-            of times, and any slip quietly removes something the customer is paying for.
+            We needed to remove an add-on from thousands of subscriptions. The platform&rsquo;s
+            one subscription endpoint was built for a person clicking in the product — the
+            caller composes the entire subscription it wants, which is fine once and dangerous
+            thousands of times.
           </p>
-          <p>
-            So I built a single-purpose one instead. "Remove this add-on" turns out to mean
-            four different things — remove it now, schedule it for the end of the term, do
-            nothing because they never had it, or refuse because a reseller manages them — and
-            a batch job has to be able to tell "nothing to do" apart from "this failed". It
-            returns a fixed set of outcomes rather than a message, and every dependency it
-            calls fails with its own log line.
-          </p>
-          <p>
-            It did the migration I built it for. Two months later another engineer extended it
-            for a different product, and a month after that a service from a different part of
-            the company started calling it. It's now the normal way to remove an add-on.
+          <ul class="points">
+            <li>Built a single-purpose endpoint instead: company, product code, done</li>
+            <li>Handled the four things &ldquo;remove this add-on&rdquo; can mean — now, scheduled, never had it, reseller-managed</li>
+            <li>Returned a fixed set of outcomes so a batch job can tell &ldquo;nothing to do&rdquo; from &ldquo;this failed&rdquo;</li>
+            <li>Gave every dependency its own log line on failure</li>
+          </ul>
+          <p class="outcome">
+            <strong>Outcome:</strong> two months later another engineer extended it for a
+            different product; a month after that a service from elsewhere in the company
+            started calling it. It is now the normal way to remove an add-on.
           </p>
         </li>
 
@@ -155,48 +144,34 @@
             <span class="when">2026 · billing side of a cross-team launch</span>
           </div>
           <p>
-            Access to the add-on was derived from the wrong thing — a flag attached to the
-            package a company had bought. Making it free meant re-deriving access from the
-            plan instead, for every existing customer, without anyone losing access for a
-            single request.
+            Access came from a flag attached to the package a company had bought. Making the
+            add-on free meant re-deriving access from the plan instead — for every existing
+            customer, without anyone losing access for a single request.
           </p>
-          <p>
-            Three things worked against it. A reconciliation service continuously repairs
-            exactly the kind of drift this migration creates, so every change had to ship as a
-            matched pair with a change there. Plan upgrades recompute entitlements from the
-            plan's configuration rather than the company's current state, so a deliberately
-            excluded customer would silently get access back just by changing plan. And
-            customers mid-trial mustn't convert to paying for something about to be free.
-          </p>
-          <p>
-            I sorted the affected companies into five groups before there was a ticket for
-            any of it, wrote the removal runbook as a decision tree, and worked the failures
-            company by company on launch day.
-          </p>
+          <ul class="points">
+            <li>Shipped every change as a matched pair with the reconciliation service, which otherwise repairs exactly the drift the migration creates</li>
+            <li>Handled plan upgrades, which recompute entitlements from configuration rather than current state — so an excluded customer would silently get access back</li>
+            <li>Sorted affected companies into five groups and wrote the removal runbook as a decision tree</li>
+            <li>Worked the failures company by company on launch day</li>
+          </ul>
         </li>
 
         <li>
           <div class="small-head">
             <h4>Seasonal revenue campaigns</h4>
-            <span class="when">2025–2026 · seven shipped</span>
+            <span class="when">2025&ndash;2026 · seven shipped</span>
           </div>
           <p>
-            A campaign looks like a banner and a discount. Underneath it's a matrix: several
-            offers, several customer segments and several plan tiers, where each combination
-            needs its own promotion, feature flag and eligibility rule — all correct on the
-            morning it goes live, and all removable the day it ends.
+            A campaign looks like a banner and a discount. Underneath it is a matrix — several
+            offers, several customer segments and several plan tiers, each combination needing
+            its own promotion, feature flag and eligibility rule.
           </p>
-          <p>
-            I did seven over two years. On the first I owned the back end while another
-            engineer built the front; on the last I wrote both halves. In between I reviewed
-            his.
-          </p>
-          <p>
-            The part I'd point at is the teardown. Every campaign leaves discounts sitting on
-            accounts that never converted, and someone has to take them off. I wrote the
-            scripts for that — they resolve each company's region, check what it actually
-            holds, and skip with a stated reason rather than guessing.
-          </p>
+          <ul class="points">
+            <li>Seven campaigns over two years, each correct on the morning it launched</li>
+            <li>Went from owning the back end while another engineer built the front, to writing both halves</li>
+            <li>Reviewed his in between</li>
+            <li>Wrote the teardown scripts — resolve each company&rsquo;s region, check what it actually holds, skip with a stated reason</li>
+          </ul>
         </li>
       </ul>
 
