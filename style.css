@@ -167,8 +167,12 @@ h3 { font-size: 1.08rem; margin: 0 0 6px; }
   .art-row figure { flex: none; }
   .art-row img { height: 300px; }
 }
+/* height:auto is load-bearing — the width/height attributes on these elements
+   are presentational hints for CSS height, so without it the attribute pins a
+   fixed height and the media is cropped or letterboxed. With it, the same
+   attributes supply the aspect ratio and reserve space before load. */
 .shots img, .shots video {
-  width: 100%; border-radius: 0; border: 1px solid var(--border);
+  width: 100%; height: auto; border-radius: 0; border: 1px solid var(--border);
   display: block; background: var(--bg-card);
 }
 figure.shot { margin: 0; }
@@ -198,7 +202,9 @@ section { scroll-margin-top: 56px; }
 /* ---------- gallery ---------- */
 .gallery { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
 figure { margin: 0; }
-figure img, .placeholder {
+/* scoped to .gallery: an unscoped `figure img` also caught the project
+   screenshots in .shots and cropped those 16:9 frames to 4:3 */
+.gallery figure img, .placeholder {
   width: 100%; aspect-ratio: 4 / 3; object-fit: cover;
   border-radius: 0; border: 1px solid var(--border); display: block;
 }
