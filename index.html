@@ -44,21 +44,20 @@
         <p class="meta">Jan 2025 – Dec 2026 · Billing &amp; Monetization · Tallinn</p>
         <p class="meta">TypeScript · React · Node.js · MySQL · Apache Kafka · Docker</p>
         <p>
-          Subscription billing — a domain where one subscription can carry discounts,
-          scheduled changes and a legacy plan at once, and every combination has to stay
-          correct across the product, the invoice and the data warehouse.
+          Subscription billing. One subscription can carry discounts, scheduled changes and a
+          legacy plan at once, and every combination has to stay correct in the product, on
+          the invoice and in the data warehouse.
         </p>
         <p>
           I led a five-person cross-functional mission — product, design, engineering and a
-          business lead at head-of-department level — that rebuilt how customers are
-          evaluated into pricing experiments. The rest was pricing and packaging: a
-          company-wide change to what customers get for their money, and the seasonal
-          campaigns that run on top of it. I owned those the whole way — database migration,
-          service, endpoint, page.
+          business lead at head-of-department level — that rebuilt how customers are picked
+          into pricing experiments. Otherwise: a company-wide change to what each plan
+          includes, and the seasonal discount campaigns. I took those from database migration
+          through service and endpoint to the page.
         </p>
         <p>
-          I also built two Claude Code skills for my team, and the scripts that run the bulk
-          billing operations every campaign ends with.
+          I also wrote two Claude Code skills for my team, and the scripts that run the bulk
+          billing operations at the end of every campaign.
         </p>
       </div>
 
@@ -67,16 +66,13 @@
         <p class="meta">Oct – Dec 2024 · Pipedrive School of Code · Tallinn</p>
         <p>
           Six weeks rebuilding an internal tool from Vue into React as a micro-frontend inside
-          the company's admin platform, starting from an empty repository. None of us had used
-          the front-end stack before, and we read from an API another team owned — which put
-          one of the features we wanted out of reach for the whole project. I set the repo up
-          on the plugin platform, built the table and detail views, wrote the typed data layer
-          and added the component test suite.
+          the company's admin platform, from an empty repository. None of us had used the
+          front-end stack before. I set the repo up on the plugin platform, built the table and
+          detail views, wrote the typed data layer and added the component test suite.
         </p>
         <p>
-          What I took from it was less React than working inside someone else's constraints and
-          shipping anyway. The tool still runs two years later under a different team, with the
-          components I wrote still in it. I joined permanently in January.
+          The tool still runs two years later under a different team, with the components I
+          wrote still in it. I joined permanently in January.
         </p>
       </div>
 
@@ -89,13 +85,13 @@
             <span class="when">2026 · Kafka · Node · Amplitude · feature flags</span>
           </div>
           <p>
-            The old design picked a customer&rsquo;s price variant at sign-up — before the data
-            that excludes sales-assigned and partner-referred accounts exists.
+            Price variants were picked at sign-up — before the data that excludes
+            sales-assigned and partner-referred accounts exists.
           </p>
           <ul class="points">
-            <li>Four services, built end to end on my own, around a Kafka consumer on a company-wide topic that re-evaluates eligibility whenever that data changes</li>
+            <li>Four services, built end to end on my own. A Kafka consumer on a company-wide topic re-evaluates eligibility whenever that data changes</li>
             <li>Config map from experiment variant to feature flags, so exclusion rules change without a deploy</li>
-            <li>Asymmetric paths — events can enable or disable a variant, the billing page can only enable</li>
+            <li>Events can enable or disable a variant; the billing page can only enable</li>
             <li>Master flag switches off when a customer enters billing details, so a late event cannot move a committed price</li>
           </ul>
           <p class="outcome">
@@ -106,7 +102,7 @@
 
         <li>
           <div class="small-head">
-            <h4>An endpoint that outgrew what I built it for</h4>
+            <h4>A private endpoint for bulk add-on removal</h4>
             <span class="when">2026 · Node · internal API design</span>
           </div>
           <p>
@@ -117,7 +113,7 @@
           <ul class="points">
             <li>Single-purpose private endpoint: company id, product code</li>
             <li>Closed enum of outcomes — removed, scheduled, never there — so a batch driver switches instead of parsing messages</li>
-            <li>Per-dependency try/catch, log line and rethrow, so failures are attributable and the caller still hears them</li>
+            <li>Per-dependency try/catch, log line and rethrow, so a failure names which dependency broke and still reaches the caller</li>
           </ul>
           <p class="outcome">
             <strong>Outcome:</strong> another engineer extended it for a different product two
@@ -136,13 +132,13 @@
             a gap.
           </p>
           <ul class="points">
-            <li>Entitlement moved onto plan features in one migration, the package-to-flag link severed in a second — in that order</li>
-            <li>Each change shipped as a matched pair with the reconciliation service, which otherwise repairs the drift straight back</li>
+            <li>Entitlement moved onto plan features in one migration, the package-to-flag link removed in a second — in that order, so no customer lost access in between</li>
+            <li>Each change shipped as a matched pair with the reconciliation service, which would otherwise have undone it</li>
             <li>Exception flags for companies that had to stay excluded, since a plan change recomputes entitlements from configuration, not current state</li>
           </ul>
           <p class="outcome">
-            <strong>Outcome:</strong> both transition flags were retired within months — the
-            parallel old-and-new world the migration had to keep correct collapsed into one path.
+            <strong>Outcome:</strong> both transition flags were retired within months. The old
+            path was gone and the migration was done.
           </p>
         </li>
 
@@ -162,7 +158,7 @@
             <li>Redemptions measured with LogQL against production logs; the figure reconciled with marketing&rsquo;s own</li>
           </ul>
           <p class="outcome">
-            <strong>Found along the way:</strong> the redemption validator nested the
+            <strong>Bug found:</strong> the redemption validator nested the
             billing-cycle check inside the tier check, so a monthly-only discount could be
             redeemed by an annual customer.
           </p>
