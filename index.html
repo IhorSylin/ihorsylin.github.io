@@ -7,28 +7,6 @@
 <meta name="description" content="Full-stack engineer in Tallinn. Two years on production subscription billing — TypeScript, React, Node and Kafka. Games and 3D art on the side.">
 <link rel="stylesheet" href="style.css?v=37">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
-<script>
-/* Arriving on a #section link should land there, not scroll the whole page to it.
-   style.css sets scroll-behavior: smooth, which the browser also applies to the
-   jump on load — a long animation from the top on a page this tall. Turn it off
-   for the arrival only; in-page clicks keep it. Re-jumps once images have loaded,
-   in case anything above the target changed height. */
-(function () {
-  if (!location.hash) return;
-  var root = document.documentElement;
-  root.style.scrollBehavior = 'auto';
-  function jump() {
-    var el = null;
-    try { el = document.querySelector(location.hash); } catch (e) { return; }
-    if (el) el.scrollIntoView();
-  }
-  document.addEventListener('DOMContentLoaded', jump);
-  window.addEventListener('load', function () {
-    jump();
-    requestAnimationFrame(function () { root.style.scrollBehavior = ''; });
-  });
-})();
-</script>
 </head>
 <body>
 
