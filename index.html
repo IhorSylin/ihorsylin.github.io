@@ -1,365 +1,515 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ihor Sylin — Full-Stack Engineer</title>
-<meta name="description" content="Full-stack engineer in Tallinn. Two years on production subscription billing — TypeScript, React, Node and Kafka. Games and 3D art on the side.">
-<link rel="stylesheet" href="style.css?v=39">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>">
-<script>
-/* Arriving on a #section link should land there, not scroll the whole page to it.
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ihor Sylin — Full-Stack Engineer</title>
+    <meta
+      name="description"
+      content="Full-stack engineer in Tallinn. Two years on production subscription billing — TypeScript, React, Node and Kafka. Games and 3D art on the side."
+    />
+    <link rel="stylesheet" href="style.css?v=39" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>▲</text></svg>"
+    />
+    <script>
+      /* Arriving on a #section link should land there, not scroll the whole page to it.
    style.css sets scroll-behavior: smooth, which the browser also applies to the
    jump on load — a long animation from the top on a page this tall. Turn it off
    for the arrival only; in-page clicks keep it. Re-jumps once images have loaded,
    in case anything above the target changed height. */
-(function () {
-  if (!location.hash) return;
-  var root = document.documentElement;
-  var target = null;
-  var done = false;
-  root.style.scrollBehavior = 'auto';
+      (function () {
+        if (!location.hash) return;
+        var root = document.documentElement;
+        var target = null;
+        var done = false;
+        root.style.scrollBehavior = "auto";
 
-  function jump() {
-    if (done) return;
-    if (!target) {
-      try { target = document.querySelector(location.hash); } catch (e) { done = true; return; }
-    }
-    if (target) target.scrollIntoView();
-  }
+        function jump() {
+          if (done) return;
+          if (!target) {
+            try {
+              target = document.querySelector(location.hash);
+            } catch (e) {
+              done = true;
+              return;
+            }
+          }
+          if (target) target.scrollIntoView();
+        }
 
-  function release() {
-    if (done) return;
-    done = true;
-    if (observer) observer.disconnect();
-    root.style.scrollBehavior = '';
-  }
+        function release() {
+          if (done) return;
+          done = true;
+          if (observer) observer.disconnect();
+          root.style.scrollBehavior = "";
+        }
 
-  var observer = null;
-  document.addEventListener('DOMContentLoaded', function () {
-    jump();
-    /* Images and video above the target settle on their real height after the
+        var observer = null;
+        document.addEventListener("DOMContentLoaded", function () {
+          jump();
+          /* Images and video above the target settle on their real height after the
        jump, which pushes the target down the page. Keep it pinned until the
        layout stops moving — but hand control straight back the moment the
        reader touches the page themselves. */
-    if (typeof ResizeObserver === 'function') {
-      observer = new ResizeObserver(jump);
-      observer.observe(document.body);
-    }
-    ['wheel', 'touchstart', 'keydown'].forEach(function (evt) {
-      window.addEventListener(evt, release, { once: true, passive: true });
-    });
-    window.addEventListener('load', function () {
-      jump();
-      setTimeout(release, 500);
-    });
-    setTimeout(release, 3000);
-  });
-})();
-</script>
-</head>
-<body>
+          if (typeof ResizeObserver === "function") {
+            observer = new ResizeObserver(jump);
+            observer.observe(document.body);
+          }
+          ["wheel", "touchstart", "keydown"].forEach(function (evt) {
+            window.addEventListener(evt, release, {
+              once: true,
+              passive: true,
+            });
+          });
+          window.addEventListener("load", function () {
+            jump();
+            setTimeout(release, 500);
+          });
+          setTimeout(release, 3000);
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="layout">
+      <header>
+        <div class="identity">
+          <img
+            src="images/portrait.jpg"
+            alt="Ihor Sylin"
+            width="150"
+            height="150"
+          />
+          <div>
+            <h1>Ihor Sylin</h1>
+            <p class="role">Full-Stack Engineer · Tallinn, Estonia</p>
+          </div>
+        </div>
+        <ul class="links">
+          <li><a href="https://github.com/IhorSylin">GitHub</a></li>
+          <li>
+            <a href="https://www.linkedin.com/in/ihor-sylin-950201330"
+              >LinkedIn</a
+            >
+          </li>
+          <li><a href="mailto:basilisk.fly@gmail.com">Email</a></li>
+          <li><a href="#projects">Projects</a></li>
+        </ul>
+        <p class="intro">
+          I'm a full-stack engineer who's primarily focused on web development.
+          My stack is <strong>TypeScript</strong>, <strong>React</strong>,
+          <strong>Node.js</strong> and <strong>Fastify</strong>. I have
+          extensive experience working with AI. Outside work I make games and
+          <strong>3D art</strong>: a few indie projects in Godot with a small
+          team.
+        </p>
+      </header>
 
-<div class="layout">
+      <main>
+        <section id="engineering">
+          <h2>Engineering</h2>
 
-  <header>
-    <div class="identity">
-      <img src="images/portrait.jpg" alt="Ihor Sylin" width="150" height="150">
-      <div>
-        <h1>Ihor Sylin</h1>
-        <p class="role">Full-Stack Engineer · Tallinn, Estonia</p>
-      </div>
+          <div class="card">
+            <h3>Pipedrive — Junior Software Engineer</h3>
+            <p class="meta">
+              Jan 2025 – Dec 2026 · Billing &amp; Monetization · Tallinn
+            </p>
+            <p class="meta">
+              TypeScript · React · Node.js · MySQL · Apache Kafka
+            </p>
+            <p>
+              Subscription billing. One subscription can carry discounts,
+              scheduled changes and a legacy plan at once, and every combination
+              has to stay correct in the product, on the invoice and in the data
+              warehouse.
+            </p>
+            <p>
+              My biggest achievement was leading a five-person cross-functional
+              project — pricing experiments. It was a two-month-long effort to
+              improve existing pricing experiments to meet new business
+              requirements.
+            </p>
+            <p>
+              Besides that, I worked on front-end-focused projects like in-app
+              marketing campaigns and redesigns of billing pages, and on
+              backend-heavy projects like subscription repackaging and feature
+              access logic migration.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Pipedrive — Software Engineering Intern</h3>
+            <p class="meta">
+              Oct – Dec 2024 · Pipedrive School of Code · Tallinn
+            </p>
+            <p>
+              For the first four weeks, we were learning JS, TypeScript, MySQL,
+              Fastify and React fundamentals. For me it was the first time
+              working with most of those languages and frameworks, since I'd
+              only learned C during my university studies.
+            </p>
+            <p>
+              Over the next six weeks we were rebuilding an internal tool from
+              scratch, moving it from Vue to React as a micro-frontend inside
+              the company's backoffice. I contributed to the front-end
+              implementation, researched the UI components used across the
+              company and the best practices we should follow, and introduced
+              the other interns to them.
+            </p>
+            <p>
+              The tool still runs two years later under a different team, with
+              the components I wrote still in it. I joined permanently as a
+              Junior Software Engineer in January 2025.
+            </p>
+          </div>
+
+          <p class="subhead">Selected work</p>
+
+          <ul class="small-list">
+            <li>
+              <div class="small-head">
+                <h4>Pricing experiments</h4>
+                <span class="when"
+                  >2026 · Kafka · Node · Amplitude Experiments</span
+                >
+              </div>
+              <p>
+                The task was to design and implement a system for dynamically
+                exposing users to different price points across multiple
+                markets. Price variants needed to be evaluated in real time
+                based on user data and experiment configurations, since user
+                eligibility could change after sign-up.
+              </p>
+              <ul class="points">
+                <li>
+                  Designed and created an endpoint for evaluating price variant
+                  eligibility and adding or removing price variants for users.
+                </li>
+                <li>
+                  Built a Kafka consumer to re-evaluate eligibility whenever
+                  relevant data changes.
+                </li>
+                <li>
+                  Configured Amplitude experiments to determine variant
+                  eligibility.
+                </li>
+                <li>Orchestrated and monitored the gradual rollout.</li>
+                <li>
+                  After the initial project had concluded, I was involved in
+                  discussions whenever questions arose regarding the pricing
+                  experiments.
+                </li>
+              </ul>
+              <p class="outcome">
+                <strong>Outcome:</strong> we built a system that dynamically
+                evaluates price variant eligibility based on real-time data and
+                configured experiments. The system was reused for multiple
+                pricing experiments after the initial implementation.
+              </p>
+            </li>
+
+            <!-- <li>
+              <div class="small-head">
+                <h4>Making a paid add-on free</h4>
+                <span class="when"
+                  >2026 · Node · MySQL · cross-team launch</span
+                >
+              </div>
+              <p>
+                Access came from a feature flag on the package a company had
+                bought. Making the add-on free meant re-deriving it from the
+                plan, for every existing customer, without a gap.
+              </p>
+              <ul class="points">
+                <li>
+                  Entitlement moved onto plan features in one migration, the
+                  package-to-flag link removed in a second — in that order, so
+                  no customer lost access in between
+                </li>
+                <li>
+                  Each change shipped as a matched pair with the reconciliation
+                  service, which would otherwise have undone it
+                </li>
+                <li>
+                  Exception flags for companies that had to stay excluded, since
+                  a plan change recomputes entitlements from configuration, not
+                  current state
+                </li>
+              </ul>
+              <p class="outcome">
+                <strong>Outcome:</strong> both transition flags were retired
+                within months. The old path was gone and the migration was done.
+              </p>
+            </li> -->
+
+            <li>
+              <div class="small-head">
+                <h4>Seasonal revenue campaigns</h4>
+                <span class="when"
+                  >2025&ndash;2026 · seven shipped · React · Node · MySQL</span
+                >
+              </div>
+              <p>
+                Throughout the 2025–2026 period, I implemented seven seasonal
+                revenue campaigns.
+              </p>
+              <ul class="points">
+                <li>
+                  Delivered some of the campaigns by myself. Changes included
+                  setting up offers, implementing new designs, and applying
+                  plan-specific rules.
+                </li>
+                <li>
+                  Negotiated with stakeholders to align on campaign rules and
+                  desired implementation.
+                </li>
+                <li>
+                  Created Node scripts for discount removal — the scripts run
+                  against live billing subscriptions, read each account&rsquo;s
+                  current discounts and remove the relevant ones.
+                </li>
+              </ul>
+              <p class="outcome">
+                <strong>Outcome:</strong> seasonal campaigns brought a
+                significant revenue increase with tangible and trackable
+                results.
+              </p>
+            </li>
+          </ul>
+
+          <div class="skills">
+            <div>
+              <h4>Frontend</h4>
+              <p>
+                TypeScript · React · Redux Toolkit · React Query ·
+                micro-frontends
+              </p>
+            </div>
+            <div>
+              <h4>Backend</h4>
+              <p>Node.js · Fastify · REST APIs · MySQL · Apache Kafka</p>
+            </div>
+            <div>
+              <h4>Practice</h4>
+              <p>
+                AI-assisted Development · Incremental Delivery · E2E
+                Implementation · Monitoring and Debugging
+              </p>
+            </div>
+            <div>
+              <h4>Graphics &amp; Games</h4>
+              <p>Godot 4 · C++ · Blender · Maya · ZBrush · Substance Painter</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="projects">
+          <h2>Projects</h2>
+
+          <div class="project" id="dwarf-escape">
+            <h3>Dwarf Escape</h3>
+            <div class="project-meta">
+              <p class="meta">
+                Godot 4 · 4–6-person team · 3D environment art &amp; materials
+              </p>
+              <ul class="links">
+                <li>
+                  <a href="https://github.com/P3-J/jamjamjam"
+                    >Source on GitHub</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <p>
+              A first-person platformer set in a dwarven mine — a pickaxe jump,
+              a grappling hook, and a timer running in the corner. I was the
+              only artist on the team, so I made the environment art, props, UI
+              assets and the materials.
+            </p>
+            <p>
+              We showcased it twice at game-dev expo events and ran tournaments
+              for it.
+            </p>
+
+            <div class="shots">
+              <figure class="shot">
+                <video
+                  src="images/dwarf-escape-loop.mp4?v=2"
+                  poster="images/dwarf-escape-poster.jpg?v=2"
+                  width="1152"
+                  height="648"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                ></video>
+              </figure>
+              <figure class="shot">
+                <img
+                  src="images/dwarf-escape-1.jpg"
+                  alt="Dwarf Escape — lava-lit mine interior"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                />
+              </figure>
+              <figure class="shot">
+                <img
+                  src="images/dwarf-escape-2.jpg"
+                  alt="Dwarf Escape — second view of level 1"
+                  width="1600"
+                  height="900"
+                  loading="lazy"
+                />
+              </figure>
+            </div>
+          </div>
+
+          <div class="project" id="wolf-hunter">
+            <h3>Wolf-Hunter</h3>
+            <div class="project-meta">
+              <p class="meta">C++ · raylib</p>
+              <ul class="links">
+                <li>
+                  <a href="https://github.com/IhorSylin/Wolf-Hunter"
+                    >Source on GitHub</a
+                  >
+                </li>
+              </ul>
+            </div>
+            <p>
+              A 2D action game written directly on raylib, with no engine
+              underneath. Everything was written by hand: enemy state machines,
+              two weapon systems with combo timers and projectiles, a dodge roll
+              with invulnerability frames, and binary save/load.
+            </p>
+            <p>
+              My favorite part was figuring out world map collision systems from
+              scratch. The map was represented as a grid of tiles, so my first
+              thought was to check collisions against the tile boundaries with
+              an army of if checks, but obviously that would be totally
+              inefficient. Instead, I used the fact that each tile had the same
+              width and height. I created a two-dimensional array whose values
+              indicated the tile type. Each frame, I would calculate which
+              element of the array to check by dividing the player's coordinates
+              by the tile size, and then only check
+              collisions against the tiles that the player could potentially
+              overlap with, based on their current position and velocity.
+            </p>
+
+            <div class="shots">
+              <figure class="shot">
+                <video
+                  src="images/wolf-hunter-loop.mp4?v=2"
+                  poster="images/wolf-hunter-poster.jpg"
+                  width="1152"
+                  height="648"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                ></video>
+              </figure>
+            </div>
+          </div>
+
+          <div class="project" id="art">
+            <h3>3D art</h3>
+            <p class="meta">Blender · Maya · ZBrush · Substance Painter</p>
+            <p>
+              Four years of 3D alongside everything else. Hard-surface modelling
+              and sculpting, UV unwrapping, baking, and texturing — both
+              hand-painted and realistic PBR.
+            </p>
+            <div class="art-row">
+              <figure>
+                <img
+                  src="images/protectron-1.jpg"
+                  alt="Protectron worker render"
+                  width="1600"
+                  height="900"
+                  tabindex="0"
+                />
+              </figure>
+              <figure class="anchor-top">
+                <img
+                  src="images/scholar.jpg"
+                  alt="Scholar character render"
+                  width="1054"
+                  height="1600"
+                  tabindex="0"
+                />
+              </figure>
+              <figure>
+                <img
+                  src="images/mr-handy-1.jpg"
+                  alt="Mr Handy robot render"
+                  width="1600"
+                  height="900"
+                  tabindex="0"
+                />
+              </figure>
+            </div>
+          </div>
+
+          <div class="project" id="small-projects">
+            <h3>Small Projects</h3>
+
+            <ul class="small-list">
+              <li>
+                <div class="small-head">
+                  <h4>Bubble Wizard</h4>
+                  <span class="when"
+                    >January 2025 · Global Game Jam Tallinn · 3rd place</span
+                  >
+                </div>
+                <p>
+                  A first-person roguelike shooter. Kill enemies, pick up the
+                  experience they drop, and spend every level-up on an upgrade.
+                  Made over a weekend in Godot with a five-person team.
+                </p>
+                <ul class="links">
+                  <li>
+                    <a href="https://drevla.itch.io/bubble-wizard"
+                      >Play on itch.io</a
+                    >
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <div class="small-head">
+                  <h4>Spectre</h4>
+                  <span class="when"
+                    >March 2025 · TalTech Spring Game Jam · Godot</span
+                  >
+                </div>
+                <p>
+                  A short first-person puzzle game. You wake up sharing your
+                  body with a ghost, and it will not leave until you find the
+                  family relics scattered through its old manor. Made over a
+                  weekend with a five-person team.
+                </p>
+                <ul class="links">
+                  <li>
+                    <a href="https://liruta.itch.io/spectre">Play on itch.io</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <footer>
+          <p>
+            <a href="mailto:basilisk.fly@gmail.com">basilisk.fly@gmail.com</a> ·
+            <a href="https://github.com/IhorSylin">github.com/IhorSylin</a>
+          </p>
+        </footer>
+      </main>
     </div>
-    <ul class="links">
-      <li><a href="https://github.com/IhorSylin">GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/ihor-sylin-950201330">LinkedIn</a></li>
-      <li><a href="mailto:basilisk.fly@gmail.com">Email</a></li>
-      <li><a href="#projects">Projects</a></li>
-    </ul>
-    <p class="intro">
-      I build and run production software — <strong>React and TypeScript</strong> over
-      <strong>Node services</strong>, with Kafka and gradual rollouts. Outside work I make
-      games and <strong>3D art</strong>: a few indie projects in Godot with a small team, and
-      a 2D action game written directly on raylib in C++.
-    </p>
-  </header>
-
-  <main>
-
-    <section id="engineering">
-      <h2>Engineering</h2>
-
-      <div class="card">
-        <h3>Pipedrive — Junior Software Engineer</h3>
-        <p class="meta">Jan 2025 – Dec 2026 · Billing &amp; Monetization · Tallinn</p>
-        <p class="meta">TypeScript · React · Node.js · MySQL · Apache Kafka · Docker</p>
-        <p>
-          Subscription billing. One subscription can carry discounts, scheduled changes and a
-          legacy plan at once, and every combination has to stay correct in the product, on
-          the invoice and in the data warehouse.
-        </p>
-        <p>
-          I led a five-person cross-functional mission — product, design, engineering and a
-          business lead at head-of-department level — that rebuilt how customers are picked
-          into pricing experiments. Otherwise: a company-wide change to what each plan
-          includes, and the seasonal discount campaigns. I took those from database migration
-          through service and endpoint to the page.
-        </p>
-        <p>
-          I also wrote two Claude Code skills for my team, and the scripts that run the bulk
-          billing operations at the end of every campaign.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Pipedrive — Software Engineering Intern</h3>
-        <p class="meta">Oct – Dec 2024 · Pipedrive School of Code · Tallinn</p>
-        <p>
-          Six weeks rebuilding an internal tool from Vue into React as a micro-frontend inside
-          the company's admin platform, from an empty repository. None of us had used the
-          front-end stack before. I set the repo up on the plugin platform, built the table and
-          detail views, wrote the typed data layer and added the component test suite.
-        </p>
-        <p>
-          The tool still runs two years later under a different team, with the components I
-          wrote still in it. I joined permanently in January.
-        </p>
-      </div>
-
-      <p class="subhead">Selected work</p>
-
-      <ul class="small-list">
-        <li>
-          <div class="small-head">
-            <h4>A platform for pricing experiments</h4>
-            <span class="when">2026 · Kafka · Node · Amplitude · feature flags</span>
-          </div>
-          <p>
-            Price variants were picked at sign-up — before the data that excludes
-            sales-assigned and partner-referred accounts exists.
-          </p>
-          <ul class="points">
-            <li>Four services, built end to end on my own. A Kafka consumer on a company-wide topic re-evaluates eligibility whenever that data changes</li>
-            <li>Config map from experiment variant to feature flags, so exclusion rules change without a deploy</li>
-            <li>Events can enable or disable a variant; the billing page can only enable</li>
-            <li>Master flag switches off when a customer enters billing details, so a late event cannot move a committed price</li>
-          </ul>
-          <p class="outcome">
-            <strong>Outcome:</strong> both experiments ran to a decision. The winner became the
-            company&rsquo;s new pricing baseline, and later rounds ran on the same platform.
-          </p>
-        </li>
-
-        <li>
-          <div class="small-head">
-            <h4>A private endpoint for bulk add-on removal</h4>
-            <span class="when">2026 · Node · internal API design</span>
-          </div>
-          <p>
-            Removing an add-on from thousands of subscriptions meant driving the general
-            subscription endpoint, where the caller composes the whole subscription. Fine once,
-            dangerous in a loop.
-          </p>
-          <ul class="points">
-            <li>Single-purpose private endpoint: company id, product code</li>
-            <li>Closed enum of outcomes — removed, scheduled, never there — so a batch driver switches instead of parsing messages</li>
-            <li>Per-dependency try/catch, log line and rethrow, so a failure names which dependency broke and still reaches the caller</li>
-          </ul>
-          <p class="outcome">
-            <strong>Outcome:</strong> another engineer extended it for a different product two
-            months later; a service from elsewhere in the company now calls it too.
-          </p>
-        </li>
-
-        <li>
-          <div class="small-head">
-            <h4>Making a paid add-on free</h4>
-            <span class="when">2026 · Node · MySQL · cross-team launch</span>
-          </div>
-          <p>
-            Access came from a feature flag on the package a company had bought. Making the
-            add-on free meant re-deriving it from the plan, for every existing customer, without
-            a gap.
-          </p>
-          <ul class="points">
-            <li>Entitlement moved onto plan features in one migration, the package-to-flag link removed in a second — in that order, so no customer lost access in between</li>
-            <li>Each change shipped as a matched pair with the reconciliation service, which would otherwise have undone it</li>
-            <li>Exception flags for companies that had to stay excluded, since a plan change recomputes entitlements from configuration, not current state</li>
-          </ul>
-          <p class="outcome">
-            <strong>Outcome:</strong> both transition flags were retired within months. The old
-            path was gone and the migration was done.
-          </p>
-        </li>
-
-        <li>
-          <div class="small-head">
-            <h4>Seasonal revenue campaigns</h4>
-            <span class="when">2025&ndash;2026 · seven shipped · Node · MySQL · Redis · React</span>
-          </div>
-          <p>
-            On the 2025 year-end campaign I owned the design and was engineering&rsquo;s point
-            of contact for the business side.
-          </p>
-          <ul class="points">
-            <li>Feature flags per offer, segment and plan tier, shipped dark then rolled out in staggered slots</li>
-            <li>Migrations for the promotion rows, each with a JSON eligibility filter naming the flag that gates it, plus Redis cache-version bumps so existing customers pick them up</li>
-            <li>Node script for teardown — a destructive bulk operation against live billing data, so it reads each account&rsquo;s current discounts first, skips anything already expired or outside the campaign, and logs a reason per account rather than a count. ~4,000 removed across 30 production runs</li>
-            <li>Redemptions measured with LogQL against production logs; the figure reconciled with marketing&rsquo;s own</li>
-          </ul>
-          <p class="outcome">
-            <strong>Bug found:</strong> the redemption validator nested the
-            billing-cycle check inside the tier check, so a monthly-only discount could be
-            redeemed by an annual customer.
-          </p>
-        </li>
-      </ul>
-
-      <div class="skills">
-        <div>
-          <h4>Frontend</h4>
-          <p>TypeScript · React · Redux Toolkit · React Query · micro-frontends</p>
-        </div>
-        <div>
-          <h4>Backend</h4>
-          <p>Node.js · Fastify · REST APIs · MySQL · Apache Kafka · Docker</p>
-        </div>
-        <div>
-          <h4>Graphics &amp; Games</h4>
-          <p>Godot 4 · GDShader / GLSL · C++ / raylib · Blender · Maya · TrenchBroom</p>
-        </div>
-        <div>
-          <h4>Practice</h4>
-          <p>Feature flags · gradual rollout · production support · Jest, Cypress · CI/CD · AI-assisted development</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2>Projects</h2>
-
-      <div class="project" id="dwarf-escape">
-        <h3>Dwarf Escape</h3>
-        <div class="project-meta">
-          <p class="meta">Godot 4 · 4–6 person team · 3D environment art &amp; materials</p>
-          <ul class="links">
-          <li><a href="https://github.com/P3-J/jamjamjam">Source on GitHub</a></li>
-        </ul>
-        </div>
-        <p>
-          A first-person platformer set in a dwarven mine — a pickaxe jump, a grappling hook,
-          and a timer running in the corner. I made the environment art and the materials:
-          the cave and architecture geometry, the tileable rock and brick textures, and the
-          lava that lights most of the level.
-        </p>
-        <p>
-          We showcased it twice at game-dev expo events and ran tournaments on it.
-        </p>
-        
-        <div class="shots">
-          <figure class="shot">
-            <video src="images/dwarf-escape-loop.mp4?v=2" poster="images/dwarf-escape-poster.jpg?v=2"
-                   width="1152" height="648" autoplay loop muted playsinline></video>
-          </figure>
-          <figure class="shot">
-            <img src="images/dwarf-escape-1.jpg" alt="Dwarf Escape — lava-lit mine interior" width="1600" height="900" loading="lazy">
-          </figure>
-          <figure class="shot">
-            <img src="images/dwarf-escape-2.jpg" alt="Dwarf Escape — second view of level 1" width="1600" height="900" loading="lazy">
-          </figure>
-        </div>
-      </div>
-
-      <div class="project" id="wolf-hunter">
-        <h3>Wolf-Hunter</h3>
-        <div class="project-meta">
-          <p class="meta">C++ · raylib · no engine · solo</p>
-          <ul class="links">
-          <li><a href="https://github.com/IhorSylin/Wolf-Hunter">Source on GitHub</a></li>
-        </ul>
-        </div>
-        <p>
-          A 2D action game written directly on raylib, with no engine underneath. Everything
-          is hand-rolled: tile collision, enemy state machines, two weapon systems with combo
-          timers and projectiles, a dodge roll with invulnerability frames, and binary
-          save/load. The art and the Tiled maps are mine too.
-        </p>
-        <p>
-          It is the project where I found out what an engine actually does for you, by not
-          having one.
-        </p>
-        
-        <div class="shots">
-          <figure class="shot">
-            <video src="images/wolf-hunter-loop.mp4?v=2" poster="images/wolf-hunter-poster.jpg"
-                   width="1152" height="648" autoplay loop muted playsinline></video>
-          </figure>
-        </div>
-      </div>
-
-      <div class="project" id="art">
-        <h3>3D art</h3>
-        <p class="meta">Blender · Maya · ZBrush · Substance Painter</p>
-        <p>
-          Four years of 3D alongside everything else. Hard-surface modelling and sculpting,
-          UV unwrapping, baking, and texturing — both hand-painted and realistic PBR. These
-          are personal pieces rather than game assets.
-        </p>
-        <div class="art-row">
-            <figure><img src="images/protectron-1.jpg" alt="Protectron worker render" width="1600" height="900" tabindex="0"></figure>
-            <figure class="anchor-top"><img src="images/scholar.jpg" alt="Scholar character render" width="1054" height="1600" tabindex="0"></figure>
-            <figure><img src="images/mr-handy-1.jpg" alt="Mr Handy robot render" width="1600" height="900" tabindex="0"></figure>
-          </div>
-      </div>
-
-      <div class="project" id="small-projects">
-        <h3>Small Projects</h3>
-
-        <ul class="small-list">
-          <li>
-            <div class="small-head">
-              <h4>Bubble Wizard</h4>
-              <span class="when">January 2025 · Global Game Jam Tallinn · 3rd place</span>
-            </div>
-            <p>
-              A first-person roguelike shooter. Kill enemies, pick up the experience they
-              drop, and every level-up hands you an upgrade. Made over a weekend in Godot with
-              a five-person team.
-            </p>
-            <ul class="links">
-              <li><a href="https://drevla.itch.io/bubble-wizard">Play on itch.io</a></li>
-            </ul>
-          </li>
-
-          <li>
-            <div class="small-head">
-              <h4>Spectre</h4>
-              <span class="when">March 2025 · TalTech Spring Game Jam · Godot</span>
-            </div>
-            <p>
-              A short first-person puzzle game. You wake up sharing your body with a ghost,
-              and it will not leave until you find the family relics scattered through its
-              old manor. Made over a weekend with a five-person team.
-            </p>
-            <ul class="links">
-              <li><a href="https://liruta.itch.io/spectre">Play on itch.io</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-
-    </section>
-
-    <footer>
-      <p>
-        <a href="mailto:basilisk.fly@gmail.com">basilisk.fly@gmail.com</a> ·
-        <a href="https://github.com/IhorSylin">github.com/IhorSylin</a>
-      </p>
-    </footer>
-
-  </main>
-
-</div><!-- /.layout -->
-
-</body>
+    <!-- /.layout -->
+  </body>
 </html>
